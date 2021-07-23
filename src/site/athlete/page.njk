@@ -1,0 +1,111 @@
+---
+pagination:
+    data: parkrun.athletes
+    size: 1
+    alias: athlete
+permalink: "athlete/{{ athlete.Name | slug }}/index.html"
+---
+
+<h1>{{athlete.Name}} - {{athlete.TotalRuns}} parkruns total</h1>
+
+<table>
+    <caption>Summary Stats</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Fastest</th>
+            <th>Average <br>(mean)</th>
+            <th>Slowest</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in athlete.Summary %}
+            <tr>
+                <td>{{row.Name}}</td>
+                <td>{{row.Fastest}}</td>
+                <td>{{row.Average}}</td>
+                <td>{{row.Slowest}}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Nothing to show</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<table>
+    <caption>Best Annual Achievements</caption>
+    <thead>
+        <tr>
+            <th>Year</th>
+            <th>Best Time</th>
+            <th>Best Age Grading</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in athlete.Achievements %}
+            <tr>
+                <td>{{row.Year}}</td>
+                <td>{{row.BestTime | time}}</td>
+                <td>{{row.BestGrade}}%</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Nothing to show</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<table>
+    <caption>Results</caption>
+    <thead>
+        <tr>
+            <th>
+                Event
+            </th>
+            <th>
+               Run Date
+            </th>
+            <th>
+                Run Number
+            </th>
+            <th>
+                Pos
+            </th>
+            <th>
+                Time
+            </th>
+            <th>
+                Age Grade
+            </th>
+            <th>
+                PB?
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in athlete.Results %}
+            <tr>
+                <td>
+                    <a href="https://www.parkrun.org.uk/{{row.Event | slug }}/results">{{row.Event}}</a>
+                </td>
+                <td>
+                    <a href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunDate | date}}</a>
+                </td>
+                <td>
+                    <a href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunNumber}}</a>
+                </td>
+                <td>{{row.Position}}</td>
+                <td>{{row.Time | time}}</td>
+                <td>{{row.AgeGrade}}%</td>
+                <td>{{row.PB | cleanBool | noNo}}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Nothing to show</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

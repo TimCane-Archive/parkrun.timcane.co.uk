@@ -1,0 +1,9 @@
+---
+pagination:
+    data: parkrun.athletes
+    size: 1
+    alias: athlete
+permalink: "athlete/{{ athlete.Name | slug }}.json"
+layout: api
+---
+{{athlete | json}}

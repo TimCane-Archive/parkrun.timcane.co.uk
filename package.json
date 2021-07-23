@@ -1,0 +1,28 @@
+{
+  "name": "parkrun.timcane.co.uk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "serve": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimCane/parkrun.timcane.co.uk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TimCane/parkrun.timcane.co.uk/issues"
+  },
+  "homepage": "https://github.com/TimCane/parkrun.timcane.co.uk#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "request": "^2.88.2"
+  }
+}
