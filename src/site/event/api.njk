@@ -1,0 +1,10 @@
+---
+permalink: course/{{ event.Event | slug }}/data.json
+layout: api
+
+pagination:
+    data: parkrun.events
+    size: 1
+    alias: event
+---
+{{event | json | safe}}

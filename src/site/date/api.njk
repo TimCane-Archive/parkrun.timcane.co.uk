@@ -1,0 +1,10 @@
+---
+permalink: date/{{ date.Date | date('yyyy') }}/{{ date.Date | date('mm') }}/{{ date.Date | date('dd') }}/data.json
+layout: api
+
+pagination:
+    data: parkrun.dates
+    size: 1
+    alias: date
+---
+{{date | json | safe }}

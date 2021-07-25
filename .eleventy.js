@@ -2,7 +2,9 @@ const cleanBoolFilter = require("./src/code/filters/clean-bool.filter")
 const jsonFilter = require("./src/code/filters/json.filter")
 const noNoFilter = require("./src/code/filters/no-no.filter")
 const timeFilter = require("./src/code/filters/time.filter")
-const dateFilter = require("./src/code/filters/date.filter")
+const dateFilter = require("./src/code/filters/date/date.filter")
+const dateSlugFilter = require("./src/code/filters/date/date-slug.filter")
+const monthFilter = require("./src/code/filters/date/month.filter")
 
 module.exports = function (config) {
 
@@ -13,7 +15,11 @@ module.exports = function (config) {
     config.addFilter("cleanBool", cleanBoolFilter);
     config.addFilter("noNo", noNoFilter);
     config.addFilter("time", timeFilter);
+
+    // Date
     config.addFilter("date", dateFilter);
+    config.addFilter("dateSlug", dateSlugFilter);
+    config.addFilter("month", monthFilter);
 
     return {
         dir: {

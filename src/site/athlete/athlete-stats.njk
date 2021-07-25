@@ -1,9 +1,11 @@
 ---
+permalink: athlete/{{ athlete.Name | slug }}/stats/index.html
+layout: page
+
 pagination:
     data: parkrun.athletes
     size: 1
     alias: athlete
-permalink: "athlete/{{ athlete.Name | slug }}/index.html"
 ---
 
 <h1>{{athlete.Name}}
@@ -88,10 +90,10 @@ permalink: "athlete/{{ athlete.Name | slug }}/index.html"
 </table>
 
 <table>
-    <caption>Event Summaries</caption>
+    <caption>Course Summaries</caption>
     <thead>
         <tr>
-            <th>Event</th>
+            <th>Course</th>
             <th>Runs</th>
             <th>Best Position</th>
             <th>Best Time</th>
@@ -101,63 +103,11 @@ permalink: "athlete/{{ athlete.Name | slug }}/index.html"
         {% for row in athlete.Events %}
             <tr>
                 <td>
-                    <a href="https://www.parkrun.org.uk/{{row.Event | slug }}/results">{{row.Event}}</a>
+                    <a href="/course/{{row.Event | slug }}">{{row.Event}}</a>
                 </td>
                 <td>{{row.Runs}}</td>
                 <td>{{row.BestPosition}}</td>
                 <td>{{row.BestTime | time}}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">Nothing to show</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-<table>
-    <caption>Results</caption>
-    <thead>
-        <tr>
-            <th>
-                Event
-            </th>
-            <th>
-               Run Date
-            </th>
-            <th>
-                Run Number
-            </th>
-            <th>
-                Pos
-            </th>
-            <th>
-                Time
-            </th>
-            <th>
-                Age Grade
-            </th>
-            <th>
-                PB?
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for row in athlete.Results %}
-            <tr>
-                <td>
-                    <a href="https://www.parkrun.org.uk/{{row.Event | slug }}/results">{{row.Event}}</a>
-                </td>
-                <td>
-                    <a href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunDate | date}}</a>
-                </td>
-                <td>
-                    <a href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunNumber}}</a>
-                </td>
-                <td>{{row.Position}}</td>
-                <td>{{row.Time | time}}</td>
-                <td>{{row.AgeGrade}}%</td>
-                <td>{{row.PB | cleanBool | noNo}}</td>
             </tr>
         {% else %}
             <tr>

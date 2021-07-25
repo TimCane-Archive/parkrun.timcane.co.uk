@@ -1,21 +1,26 @@
 ---
+permalink: course/{{ event.Event | slug }}/index.html
 layout: page
+
+pagination:
+    data: parkrun.events
+    size: 1
+    alias: event
 ---
 
-<h1>Feed</h1>
+<h1>
+    {{event.Event}}
+</h1>
 
-{% for year in parkrun.feed %}
-{% for month in year.Months %}
-
-<h2>{{month.Results[0].RunDate | date("dS mmm yyyy") }}</h2>
 <table>
+    <caption>Results</caption>
     <thead>
         <tr>
             <th>
                 Athlete
             </th>
             <th>
-               Course
+               Run Date
             </th>
             <th>
                 Run #
@@ -35,13 +40,13 @@ layout: page
         </tr>
     </thead>
     <tbody>
-        {% for row in month.Results %} 
+        {% for row in event.Results %}
             <tr>
                 <td>
                     <a href="/athlete/{{row.AthleteName | slug }}">{{row.AthleteName}}</a>
                 </td>
                 <td>
-                    <a href="/course/{{row.Event | slug }}">{{row.Event}}</a>
+                    <a href="/date/{{row.RunDate | date('yyyy')}}/{{row.RunDate | date('mm')}}/{{row.RunDate | date('dd')}}">{{row.RunDate | date("dS mmm yyyy")}}</a>
                 </td>
                 <td>
                     <a href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunNumber}}</a>
@@ -58,5 +63,3 @@ layout: page
         {% endfor %}
     </tbody>
 </table>
-{% endfor %}
-{% endfor %}

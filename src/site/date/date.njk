@@ -1,14 +1,19 @@
 ---
+permalink: date/{{ date.Date | date('yyyy') }}/{{ date.Date | date('mm') }}/{{ date.Date | date('dd') }}/index.html
 layout: page
+
+pagination:
+    data: parkrun.dates
+    size: 1
+    alias: date
 ---
 
-<h1>Feed</h1>
+<h1>
+    {{date.Date | date("dS mmmm yyyy")}}
+</h1>
 
-{% for year in parkrun.feed %}
-{% for month in year.Months %}
-
-<h2>{{month.Results[0].RunDate | date("dS mmm yyyy") }}</h2>
 <table>
+    <caption>Results</caption>
     <thead>
         <tr>
             <th>
@@ -35,7 +40,7 @@ layout: page
         </tr>
     </thead>
     <tbody>
-        {% for row in month.Results %} 
+        {% for row in date.Results %}
             <tr>
                 <td>
                     <a href="/athlete/{{row.AthleteName | slug }}">{{row.AthleteName}}</a>
@@ -58,5 +63,26 @@ layout: page
         {% endfor %}
     </tbody>
 </table>
-{% endfor %}
-{% endfor %}
+
+<div>
+    <span>
+        {% if page.url != pagination.href.first %}
+            <a href="{{ pagination.href.first }}">Latest</a>
+        {% endif %}
+    </span>
+    <span>
+        {% if pagination.href.previous %}
+            <a href="{{ pagination.href.previous }}"><<</a>
+        {% endif %}
+    </span>
+    <span>
+        {% if pagination.href.next %}
+            <a href="{{ pagination.href.next }}">>></a>
+        {% endif %}
+    </span>
+    <span>
+        {% if page.url != pagination.href.last %}
+            <a href="{{ pagination.href.last }}">Oldest</a>
+        {% endif %}
+    </span>
+</div>
