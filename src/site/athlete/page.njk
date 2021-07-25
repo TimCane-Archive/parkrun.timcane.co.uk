@@ -6,7 +6,9 @@ pagination:
 permalink: "athlete/{{ athlete.Name | slug }}/index.html"
 ---
 
-<h1>{{athlete.Name}} - {{athlete.TotalRuns}} parkruns total</h1>
+<h1>{{athlete.Name}}
+    <small>{{athlete.TotalRuns}} total runs!</small>
+</h1>
 
 <table>
     <caption>Summary Stats</caption>
@@ -19,18 +21,45 @@ permalink: "athlete/{{ athlete.Name | slug }}/index.html"
         </tr>
     </thead>
     <tbody>
-        {% for row in athlete.Summary %}
-            <tr>
-                <td>{{row.Name}}</td>
-                <td>{{row.Fastest}}</td>
-                <td>{{row.Average}}</td>
-                <td>{{row.Slowest}}</td>
+        {% set time = athlete.Summary.Time %}
+        {% if time %}
+            <tr class="time">
+                <td>Time</td>
+                <td>{{time.Fastest | time}}</td>
+                <td>{{time.Average | time}}</td>
+                <td>{{time.Slowest | time}}</td>
             </tr>
         {% else %}
-            <tr>
+            <tr class="time empty">
                 <td colspan="4">Nothing to show</td>
             </tr>
-        {% endfor %}
+        {% endif %}
+        {% set grade = athlete.Summary.AgeGrade %}
+        {% if grade %}
+            <tr class="grade">
+                <td>Age Grade</td>
+                <td>{{grade.Fastest}}%</td>
+                <td>{{grade.Average}}%</td>
+                <td>{{grade.Slowest}}%</td>
+            </tr>
+        {% else %}
+            <tr class="grade empty">
+                <td colspan="4">Nothing to show</td>
+            </tr>
+        {% endif %}
+        {% set oPos = athlete.Summary.OverallPosition %}
+        {% if oPos %}
+            <tr class="overall-pos">
+                <td>Overall Position</td>
+                <td>{{oPos.Fastest}}</td>
+                <td>{{oPos.Average}}</td>
+                <td>{{oPos.Slowest}}</td>
+            </tr>
+        {% else %}
+            <tr class="overall-pos empty">
+                <td colspan="4">Nothing to show</td>
+            </tr>
+        {% endif %}
     </tbody>
 </table>
 
@@ -49,6 +78,34 @@ permalink: "athlete/{{ athlete.Name | slug }}/index.html"
                 <td>{{row.Year}}</td>
                 <td>{{row.BestTime | time}}</td>
                 <td>{{row.BestGrade}}%</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Nothing to show</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<table>
+    <caption>Event Summaries</caption>
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Runs</th>
+            <th>Best Position</th>
+            <th>Best Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in athlete.Events %}
+            <tr>
+                <td>
+                    <a href="https://www.parkrun.org.uk/{{row.Event | slug }}/results">{{row.Event}}</a>
+                </td>
+                <td>{{row.Runs}}</td>
+                <td>{{row.BestPosition}}</td>
+                <td>{{row.BestTime | time}}</td>
             </tr>
         {% else %}
             <tr>

@@ -1,8 +1,10 @@
 {% for athlete in parkrun.athletes %}
-    {{ athlete.Id }}
-    {{athlete.Name}}
-    {{athlete.TotalRuns}}
-    {{athlete.Summary}}
+<div>
+<b>{{ athlete.Id }}</b>
+<span>{{athlete.Name}}</span>
+</div>
+    
+    
 
 {% else %}
     <li>This would display if the 'item' collection were empty</li>
