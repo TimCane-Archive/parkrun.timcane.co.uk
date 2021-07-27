@@ -2,7 +2,9 @@ module.exports = {
     GetAllResults: getAllResults,
     GroupResultsByEvent: groupResultsByEvent,
     GroupResultsByDate: groupResultsByDate,
-    GroupResultsForFeed: groupResultsForFeed
+    LatestResults: latestResults,
+    GroupResultsByYear: groupResultsByYear,
+    GroupResultsByMonth:groupResultsByMonth
 };
 
 
@@ -41,7 +43,12 @@ function groupResultsByEvent(results) {
 
             output.push({
                 Event: key,
-                Results: results
+                Results: results,
+                Stats: {
+                    TotalRuns: results.length,
+                    BestRun: Math.min.apply(Math, results.map(function (o) { return o.Time; })),
+                    AverageRun: Math.round(results.reduce(function (a, b) { return a + b.Time; }, 0) / results.length)
+                }
             })
         }
     }
@@ -75,41 +82,66 @@ function groupResultsByDate(results) {
     return output;
 }
 
-function groupResultsForFeed(results) {
-    let years = [];
+function groupResultsByYear(results) {
+    let output = [];
 
-    for (const result of results) {
-        let runYear = result.RunDate.getFullYear();
-        let runMonth = result.RunDate.getMonth();
+    var groups = results.reduce(function (rv, x) {
+        (rv[x.RunDate.getFullYear()] = rv[x.RunDate.getFullYear()] || []).push(x);
+        return rv;
+    }, {});
 
-        let year;
-        let foundYears = years.filter(y => y.Year == runYear);
-        if (foundYears.length == 1) {
-            year = foundYears[0];
-        } else {
-            year = {
-                Year: runYear,
-                Months: []
-            }
+    for (const key in groups) {
+        if (Object.hasOwnProperty.call(groups, key)) {
+            let results = groups[key];
 
-            years.push(year);
+            results = results.sort(function (a, b) {
+                return a.Time - b.Time;
+            });
+
+            output.push({
+                Year: key,
+                Results: results
+            })
         }
-
-        let month;
-        let foundMonths = year.Months.filter(y => y.Month == runMonth);
-        if (foundMonths.length == 1) {
-            month = foundMonths[0];
-        } else {
-            month = {
-                Month: runMonth,
-                Results: []
-            }
-
-            year.Months.push(month);
-        }
-
-        month.Results.push(result);
     }
 
-    return years;
+    return output;
+}
+
+function groupResultsByMonth(results) {
+    let output = [];
+
+    var groups = results.reduce(function (rv, x) {
+        (rv[x.RunDate.getFullYear() + "-" + (x.RunDate.getMonth() + 1)] = rv[x.RunDate.getFullYear() + "-" + (x.RunDate.getMonth() + 1)] || []).push(x);
+        return rv;
+    }, {});
+
+    for (const key in groups) {
+        if (Object.hasOwnProperty.call(groups, key)) {
+            let results = groups[key];
+
+            results = results.sort(function (a, b) {
+                return a.Time - b.Time;
+            });
+
+            output.push({
+                Year: key.split("-")[0],
+                Month: ("0" + key.split("-")[1]).slice(-2),
+                Results: results
+            })
+        }
+    }
+
+    return output;
+}
+
+
+function latestResults(results) {
+
+    var latest = results.reduce((a, b) => (a > b.RunDate ? a : b.RunDate), new Date(0));
+
+    return {
+        Date: latest,
+        Results: results.filter(function(r) { return r.RunDate == latest })
+    }
 }

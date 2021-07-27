@@ -1,5 +1,5 @@
 ---
-permalink: athlete/{{ athlete.Name | slug }}/index.html
+permalink: "{{ hyperlink.athlete }}/{{ athlete.Name | slug }}/index.html"
 layout: page
 
 pagination:
@@ -11,6 +11,8 @@ pagination:
 <h1>{{athlete.Name}}
     <small>{{athlete.TotalRuns}} total runs!</small>
 </h1>
+
+<a href="/{{ hyperlink.athlete }}">View All Runners</a>
 
 <table>
     <caption>Results</caption>
@@ -43,10 +45,10 @@ pagination:
         {% for row in athlete.Results %}
             <tr>
                 <td>
-                    <a href="/course/{{row.Event | slug }}">{{row.Event}}</a>
+                    <a href="/{{ hyperlink.event }}/{{row.Event | slug }}">{{row.Event}}</a>
                 </td>
                 <td>
-                    <a href="/date/{{row.RunDate | date('yyyy')}}/{{row.RunDate | date('mm')}}/{{row.RunDate | date('dd')}}">{{row.RunDate | date("dS mmm yyyy")}}</a>
+                    <a href="/{{ hyperlink.date }}/{{row.RunDate | date('yyyy')}}/{{row.RunDate | date('mm')}}/{{row.RunDate | date('dd')}}">{{row.RunDate | date("dS mmm yyyy")}}</a>
                 </td>
                 <td>
                     <a href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunNumber}}</a>

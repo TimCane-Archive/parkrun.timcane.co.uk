@@ -1,5 +1,5 @@
 const GetAthlete = require("../../code/parkrun/get-athletes");
-const { GetAllResults, GroupResultsByEvent, GroupResultsByDate, GroupResultsForFeed } = require("../../code/parkrun/transform-results");
+const { GetAllResults, GroupResultsByEvent, GroupResultsByDate, LatestResults, GroupResultsByYear, GroupResultsByMonth } = require("../../code/parkrun/transform-results");
 
 module.exports = function () {
     return new Promise((resolve, reject) => {
@@ -30,8 +30,12 @@ module.exports = function () {
                         athletes: athletes,
                         results: results,
                         events: GroupResultsByEvent(results),
-                        dates: GroupResultsByDate(results),
-                        feed: GroupResultsForFeed(results)
+                        dates: {
+                            day: GroupResultsByDate(results),
+                            year: GroupResultsByYear(results),
+                            month: GroupResultsByMonth(results)
+                        },
+                        latest: LatestResults(results)
                     });
                 }
             )

@@ -2,12 +2,10 @@
 layout: page
 ---
 
-<h1>Feed</h1>
+<h1>Latest</h1>
 
-{% for year in parkrun.feed %}
-{% for month in year.Months %}
+<h2>{{parkrun.latest.Date | date("dS mmm yyyy") }}</h2>
 
-<h2>{{month.Results[0].RunDate | date("dS mmm yyyy") }}</h2>
 <table>
     <thead>
         <tr>
@@ -35,13 +33,13 @@ layout: page
         </tr>
     </thead>
     <tbody>
-        {% for row in month.Results %} 
+        {% for row in parkrun.latest.Results %}
             <tr>
                 <td>
-                    <a href="/athlete/{{row.AthleteName | slug }}">{{row.AthleteName}}</a>
+                    <a href="/{{ hyperlink.athlete }}/{{row.AthleteName | slug }}">{{row.AthleteName}}</a>
                 </td>
                 <td>
-                    <a href="/course/{{row.Event | slug }}">{{row.Event}}</a>
+                    <a href="/{{ hyperlink.event }}/{{row.Event | slug }}">{{row.Event}}</a>
                 </td>
                 <td>
                     <a href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunNumber}}</a>
@@ -58,5 +56,3 @@ layout: page
         {% endfor %}
     </tbody>
 </table>
-{% endfor %}
-{% endfor %}

@@ -1,23 +1,24 @@
 ---
-permalink: "{{ hyperlink.date }}/{{ date.Date | date('yyyy') }}/{{ date.Date | date('mm') }}/{{ date.Date | date('dd') }}/index.html"
+permalink: "{{ hyperlink.date }}/{{ year.Year }}/index.html"
 layout: page
 
 pagination:
-    data: parkrun.dates.day
+    data: parkrun.dates.year
     size: 1
-    alias: date
+    alias: year
 ---
 
 <h1>
-    {{date.Date | date("dS mmmm yyyy")}}
+    {{year.Year}}
 </h1>
-
-<a href='/{{ hyperlink.date }}/{{ date.Date | date('yyyy') }}/{{ date.Date | date('mm') }}'>View runs in {{date.Date | date("mmmm yyyy")}}</a>
 
 <table>
     <caption>Results</caption>
     <thead>
         <tr>
+            <th>
+                Run Date
+            </th>
             <th>
                 Athlete
             </th>
@@ -42,8 +43,11 @@ pagination:
         </tr>
     </thead>
     <tbody>
-        {% for row in date.Results %}
+        {% for row in year.Results %}
             <tr>
+                <td>
+                    <a href="/{{ hyperlink.date }}/{{row.RunDate | date('yyyy')}}/{{row.RunDate | date('mm')}}/{{row.RunDate | date('dd')}}">{{row.RunDate | date("dS mmm")}}</a>
+                </td>
                 <td>
                     <a href="/{{ hyperlink.athlete }}/{{row.AthleteName | slug }}">{{row.AthleteName}}</a>
                 </td>

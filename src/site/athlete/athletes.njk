@@ -1,0 +1,29 @@
+---
+permalink: "{{ hyperlink.athlete }}/index.html"
+layout: page
+---
+
+<h1>Athletes</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Athlete</th>
+            <th>Total Runs</th>
+            <th>Best Time</th>
+            <th>Average Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for athlete in parkrun.athletes %}
+            <tr>
+                <td>
+                    <a href="/{{ hyperlink.athlete }}/{{athlete.Name | slug}}">{{athlete.Name}}</a>
+                </td>
+                <td>{{athlete.TotalRuns}}</td>
+                <td>{{athlete.Summary.Time.Fastest | time}}</td>
+                <td>{{athlete.Summary.Time.Average | time}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

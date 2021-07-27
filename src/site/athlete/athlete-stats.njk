@@ -1,5 +1,5 @@
 ---
-permalink: athlete/{{ athlete.Name | slug }}/stats/index.html
+permalink: "{{ hyperlink.athlete }}/{{ athlete.Name | slug }}/stats/index.html"
 layout: page
 
 pagination:
@@ -103,7 +103,7 @@ pagination:
         {% for row in athlete.Events %}
             <tr>
                 <td>
-                    <a href="/course/{{row.Event | slug }}">{{row.Event}}</a>
+                    <a href="/{{ hyperlink.event }}/{{row.Event | slug }}">{{row.Event}}</a>
                 </td>
                 <td>{{row.Runs}}</td>
                 <td>{{row.BestPosition}}</td>
