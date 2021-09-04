@@ -2,27 +2,29 @@
 permalink: "{{ hyperlink.athlete }}/index.html"
 layout: page
 ---
-
-<h1>Athletes</h1>
-
-<table>
+<table class="sticky">
     <thead>
         <tr>
-            <th>Athlete</th>
-            <th>Total Runs</th>
-            <th>Best Time</th>
-            <th>Average Time</th>
+            <th class="center" colspan="4">
+                <h1>Athletes</h1>
+            </th>
+        </tr>
+        <tr>
+            <th class="left">Athlete</th>
+            <th class="center">Total Runs</th>
+            <th class="center">Best Time</th>
+            <th class="center">Average Time</th>
         </tr>
     </thead>
     <tbody>
         {% for athlete in parkrun.athletes %}
             <tr>
-                <td>
+                <td class="left">
                     <a href="/{{ hyperlink.athlete }}/{{athlete.Name | slug}}">{{athlete.Name}}</a>
                 </td>
-                <td>{{athlete.TotalRuns}}</td>
-                <td>{{athlete.Summary.Time.Fastest | time}}</td>
-                <td>{{athlete.Summary.Time.Average | time}}</td>
+                <td class="center">{{athlete.TotalRuns}}</td>
+                <td class="center">{{athlete.Summary.Time.Fastest | time}}</td>
+                <td class="center">{{athlete.Summary.Time.Average | time}}</td>
             </tr>
         {% endfor %}
     </tbody>

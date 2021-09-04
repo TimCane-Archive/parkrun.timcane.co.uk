@@ -8,34 +8,39 @@ pagination:
     alias: event
 ---
 
-<h1>
-    {{event.Event}}
-</h1>
 <a href="/{{ hyperlink.event }}">View All Courses</a>
 
-<table>
-    <caption>Results</caption>
+<table class="sticky">
     <thead>
         <tr>
-            <th>
+            <th class="center" colspan="6">
+                <h1>{{event.Event}}</h1>
+            </th>
+            <th class="center">
+                <div>Total Runs</div>
+                <div>{{event.Stats.TotalRuns}}</div>
+            </th>
+        </tr>
+        <tr>
+            <th  class="left">
                 Athlete
             </th>
-            <th>
+            <th  class="left">
                Run Date
             </th>
-            <th>
+            <th  class="center">
                 Run #
             </th>
-            <th>
+            <th class="center">
                 Position
             </th>
-            <th>
+            <th class="center">
                 Time
             </th>
-            <th>
+            <th class="center">
                 Age Grade
             </th>
-            <th>
+            <th class="center">
                 PB?
             </th>
         </tr>
@@ -43,19 +48,23 @@ pagination:
     <tbody>
         {% for row in event.Results %}
             <tr>
-                <td>
+                <td class="left">
                     <a href="/{{ hyperlink.athlete }}/{{row.AthleteName | slug }}">{{row.AthleteName}}</a>
                 </td>
-                <td>
+                <td class="left">
                     <a href="/{{ hyperlink.date }}/{{row.RunDate | date('yyyy')}}/{{row.RunDate | date('mm')}}/{{row.RunDate | date('dd')}}">{{row.RunDate | date("dS mmm yyyy")}}</a>
                 </td>
-                <td>
+                <td class="center">
                     <a href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunNumber}}</a>
                 </td>
-                <td>{{row.Position}}</td>
-                <td>{{row.Time | time}}</td>
-                <td>{{row.AgeGrade}}%</td>
-                <td>{{row.PB | cleanBool | noNo}}</td>
+                <td class="center">{{row.Position}}</td>
+                <td class="center">{{row.Time | time}}</td>
+                <td class="center">{{row.AgeGrade}}%</td>
+                <td class="center">
+                    {% if row.PB %}
+                        {% include "pb-medal.svg" %}
+                    {% endif %}
+                </td>
             </tr>
         {% else %}
             <tr>

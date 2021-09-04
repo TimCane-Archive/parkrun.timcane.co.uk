@@ -1,0 +1,22 @@
+<div style="display:none;">
+    <span>
+        {% if page.url != pagination.href.first %}
+            <a href="{{ pagination.href.first }}">Latest</a>
+        {% endif %}
+    </span>
+    <span>
+        {% if pagination.href.previous %}
+            <a href="{{ pagination.href.previous }}"><<</a>
+        {% endif %}
+    </span>
+    <span>
+        {% if pagination.href.next %}
+            <a href="{{ pagination.href.next }}">>></a>
+        {% endif %}
+    </span>
+    <span>
+        {% if page.url != pagination.href.last %}
+            <a href="{{ pagination.href.last }}">Oldest</a>
+        {% endif %}
+    </span>
+</div>

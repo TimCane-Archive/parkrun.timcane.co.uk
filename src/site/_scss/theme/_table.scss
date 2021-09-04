@@ -1,0 +1,65 @@
+table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+
+    &.sticky{
+        thead{
+            position: sticky;
+            top: 0;
+        }
+    }
+
+    tr {
+        th,
+        td {
+            padding: 12px 15px;
+        }
+    }
+
+    thead {
+
+        a{
+            color: $white;
+            text-decoration: none;
+        }
+
+        tr {
+            background-color: $primary;
+            color: $white;
+            text-align: left;
+        }
+    }
+    tbody {
+        tr {
+            border-bottom: 1px solid $lighter-grey;
+
+            &:nth-of-type(even) {
+                background-color: $light-grey;
+            }
+
+            &:last-of-type {
+                border-bottom: 2px solid $primary;
+            }
+
+            td{
+                .pb-medal{
+                    fill: $primary;
+                }
+            }
+        }
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .left {
+        text-align: left;
+    }
+    .right {
+        text-align: right;
+    }
+}

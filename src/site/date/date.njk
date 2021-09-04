@@ -8,35 +8,51 @@ pagination:
     alias: date
 ---
 
-<h1>
-    {{date.Date | date("dS mmmm yyyy")}}
-</h1>
-
 <a href='/{{ hyperlink.date }}/{{ date.Date | date('yyyy') }}/{{ date.Date | date('mm') }}'>View runs in {{date.Date | date("mmmm yyyy")}}</a>
 
-<table>
-    <caption>Results</caption>
+<table class="sticky">
     <thead>
         <tr>
-            <th>
+            <th class="left">
+                {% if pagination.href.next %}
+                    <a href="{{ pagination.href.next }}">
+                    &larr;
+                    </a>
+                {% endif %}
+            </th>
+            <th colspan="5" class="center">
+                <h1>
+                    {{date.Date | date("dS mmmm yyyy")}}
+                </h1>
+            </th>
+            <th class="right">
+                {% if pagination.href.previous %}
+                    <a href="{{ pagination.href.previous }}">
+                    &rarr;
+                    </a>
+                {% endif %}
+            </th>
+        </tr>
+        <tr>
+            <th class="left">
                 Athlete
             </th>
-            <th>
+            <th class="left">
                Course
             </th>
-            <th>
+            <th class="center">
                 Run #
             </th>
-            <th>
+            <th class="center">
                 Position
             </th>
-            <th>
+            <th class="center">
                 Time
             </th>
-            <th>
+            <th class="center">
                 Age Grade
             </th>
-            <th>
+            <th class="center">
                 PB?
             </th>
         </tr>
@@ -44,19 +60,23 @@ pagination:
     <tbody>
         {% for row in date.Results %}
             <tr>
-                <td>
+                <td class="left">
                     <a href="/{{ hyperlink.athlete }}/{{row.AthleteName | slug }}">{{row.AthleteName}}</a>
                 </td>
-                <td>
+                <td class="left">
                     <a href="/{{ hyperlink.event }}/{{row.Event | slug }}">{{row.Event}}</a>
                 </td>
-                <td>
+                <td class="center">
                     <a href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunNumber}}</a>
                 </td>
-                <td>{{row.Position}}</td>
-                <td>{{row.Time | time}}</td>
-                <td>{{row.AgeGrade}}%</td>
-                <td>{{row.PB | cleanBool | noNo}}</td>
+                <td class="center">{{row.Position}}</td>
+                <td class="center">{{row.Time | time}}</td>
+                <td class="center">{{row.AgeGrade}}%</td>
+                <td class="center">
+                    {% if row.PB %}
+                        {% include "pb-medal.svg" %}
+                    {% endif %}
+                </td>
             </tr>
         {% else %}
             <tr>
@@ -65,26 +85,4 @@ pagination:
         {% endfor %}
     </tbody>
 </table>
-
-<div>
-    <span>
-        {% if page.url != pagination.href.first %}
-            <a href="{{ pagination.href.first }}">Latest</a>
-        {% endif %}
-    </span>
-    <span>
-        {% if pagination.href.previous %}
-            <a href="{{ pagination.href.previous }}"><<</a>
-        {% endif %}
-    </span>
-    <span>
-        {% if pagination.href.next %}
-            <a href="{{ pagination.href.next }}">>></a>
-        {% endif %}
-    </span>
-    <span>
-        {% if page.url != pagination.href.last %}
-            <a href="{{ pagination.href.last }}">Oldest</a>
-        {% endif %}
-    </span>
-</div>
+{% include "pagination.njk" %}

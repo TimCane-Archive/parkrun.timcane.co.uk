@@ -3,30 +3,33 @@ permalink: "{{ hyperlink.event }}/index.html"
 layout: page
 ---
 
-<h1>Events</h1>
-
-<table>
+<table class="sticky">
     <thead>
         <tr>
-            <th>Course</th>
-            <th>Total Runs</th>
-            <th>Best Time</th>
-            <th>Average Time</th>
+            <th class="center" colspan="4">
+                <h1>Courses</h1>
+            </th>
+        </tr>
+        <tr>
+            <th class="left">Course</th>
+            <th class="center">Total Runs</th>
+            <th class="center">Best Time</th>
+            <th class="center">Average Time</th>
         </tr>
     </thead>
     <tbody>
         {% for event in parkrun.events %}
             <tr>
-                <td>
+                <td class="left">
                     <a href="/{{ hyperlink.event }}/{{event.Event | slug}}">{{event.Event}}</a>
                 </td>
-                <td>
+                <td class="center">
                     {{event.Stats.TotalRuns}}
                 </td>
-                <td>
+                <td class="center">
                     {{event.Stats.BestRun | time}}
                 </td>
-                <td>
+                <td class="center">
                     {{event.Stats.AverageRun | time}}
                 </td>
             </tr>

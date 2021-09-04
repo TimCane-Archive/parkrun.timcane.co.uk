@@ -1,3 +1,5 @@
+const pluginSass = require("eleventy-plugin-sass");
+
 const cleanBoolFilter = require("./src/code/filters/clean-bool.filter")
 const jsonFilter = require("./src/code/filters/json.filter")
 const noNoFilter = require("./src/code/filters/no-no.filter")
@@ -20,6 +22,12 @@ module.exports = function (config) {
     config.addFilter("date", dateFilter);
     config.addFilter("dateSlug", dateSlugFilter);
     config.addFilter("month", monthFilter);
+
+    config.addPlugin(pluginSass, {
+        watch: ["**/theme.scss"],
+        outputDir: "dist/assets/css/",
+        remap: true
+    });
 
     return {
         dir: {
