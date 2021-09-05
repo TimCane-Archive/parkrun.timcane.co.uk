@@ -30,10 +30,10 @@ pagination:
         {% set time = athlete.Summary.Time %}
         {% if time %}
             <tr class="time">
-                <td class="left">Time</td>
-                <td class="center">{{time.Fastest | time}}</td>
-                <td class="center">{{time.Average | time}}</td>
-                <td class="center">{{time.Slowest | time}}</td>
+                <td data-label="Stat" class="left">Time</td>
+                <td data-label="Fastest" class="center">{{time.Fastest | time}}</td>
+                <td data-label="Average (mean)" class="center">{{time.Average | time}}</td>
+                <td data-label="Slowest" class="center">{{time.Slowest | time}}</td>
             </tr>
         {% else %}
             <tr class="time empty">
@@ -43,10 +43,10 @@ pagination:
         {% set grade = athlete.Summary.AgeGrade %}
         {% if grade %}
             <tr class="grade">
-                <td class="left">Age Grade</td>
-                <td class="center">{{grade.Fastest}}%</td>
-                <td class="center">{{grade.Average}}%</td>
-                <td class="center">{{grade.Slowest}}%</td>
+                <td data-label="Stat" class="left">Age Grade</td>
+                <td data-label="Fastest" class="center">{{grade.Fastest}}%</td>
+                <td data-label="Average (mean)" class="center">{{grade.Average}}%</td>
+                <td data-label="Slowest" class="center">{{grade.Slowest}}%</td>
             </tr>
         {% else %}
             <tr class="grade empty">
@@ -56,10 +56,10 @@ pagination:
         {% set oPos = athlete.Summary.OverallPosition %}
         {% if oPos %}
             <tr class="overall-pos">
-                <td class="left">Overall Position</td>
-                <td class="center">{{oPos.Fastest}}</td>
-                <td class="center">{{oPos.Average}}</td>
-                <td class="center">{{oPos.Slowest}}</td>
+                <td data-label="Stat" class="left">Overall Position</td>
+                <td data-label="Fastest" class="center">{{oPos.Fastest}}</td>
+                <td data-label="Average (mean)" class="center">{{oPos.Average}}</td>
+                <td data-label="Slowest" class="center">{{oPos.Slowest}}</td>
             </tr>
         {% else %}
             <tr class="overall-pos empty">
@@ -85,9 +85,9 @@ pagination:
     <tbody>
         {% for row in athlete.Achievements %}
             <tr>
-                <td class="center">{{row.Year}}</td>
-                <td class="center">{{row.BestTime | time}}</td>
-                <td class="center">{{row.BestGrade}}%</td>
+                <td data-label="Year" class="center">{{row.Year}}</td>
+                <td data-label="Best Time" class="center">{{row.BestTime | time}}</td>
+                <td data-label="Best Age Grading" class="center">{{row.BestGrade}}%</td>
             </tr>
         {% else %}
             <tr>
@@ -114,12 +114,12 @@ pagination:
     <tbody>
         {% for row in athlete.Events %}
             <tr>
-                <td class="left">
+                <td data-label="Course" class="left">
                     <a href="/{{ hyperlink.event }}/{{row.Event | slug }}">{{row.Event}}</a>
                 </td>
-                <td class="center">{{row.Runs}}</td>
-                <td class="center">{{row.BestPosition}}</td>
-                <td class="center">{{row.BestTime | time}}</td>
+                <td data-label="Runs" class="center">{{row.Runs}}</td>
+                <td data-label="Best Position" class="center">{{row.BestPosition}}</td>
+                <td data-label="Best Time" class="center">{{row.BestTime | time}}</td>
             </tr>
         {% else %}
             <tr>

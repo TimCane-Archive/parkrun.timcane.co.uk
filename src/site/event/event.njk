@@ -48,27 +48,29 @@ pagination:
     <tbody>
         {% for row in event.Results %}
             <tr>
-                <td class="left">
+                <td data-label="Athlete" class="left">
                     <a href="/{{ hyperlink.athlete }}/{{row.AthleteName | slug }}">{{row.AthleteName}}</a>
                 </td>
-                <td class="left">
+                <td data-label="Run Date" class="left">
                     <a href="/{{ hyperlink.date }}/{{row.RunDate | date('yyyy')}}/{{row.RunDate | date('mm')}}/{{row.RunDate | date('dd')}}">{{row.RunDate | date("dS mmm yyyy")}}</a>
                 </td>
-                <td class="center">
+                <td data-label="Run #" class="center">
                     <a href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunNumber}}</a>
                 </td>
-                <td class="center">{{row.Position}}</td>
-                <td class="center">{{row.Time | time}}</td>
-                <td class="center">{{row.AgeGrade}}%</td>
-                <td class="center">
+                <td data-label="Position" class="center">{{row.Position}}</td>
+                <td data-label="Time" class="center">{{row.Time | time}}</td>
+                <td data-label="Age Grade" class="center">{{row.AgeGrade}}%</td>
+                <td data-label="PB?" class="center">
                     {% if row.PB %}
                         {% include "pb-medal.svg" %}
+                    {% else %}
+                    &nbsp;
                     {% endif %}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">Nothing to show</td>
+                <td class="center" colspan="7">Nothing to show</td>
             </tr>
         {% endfor %}
     </tbody>

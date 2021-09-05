@@ -19,12 +19,12 @@ layout: page
     <tbody>
         {% for athlete in parkrun.athletes %}
             <tr>
-                <td class="left">
+                <td data-label="Athlete" class="left">
                     <a href="/{{ hyperlink.athlete }}/{{athlete.Name | slug}}">{{athlete.Name}}</a>
                 </td>
-                <td class="center">{{athlete.TotalRuns}}</td>
-                <td class="center">{{athlete.Summary.Time.Fastest | time}}</td>
-                <td class="center">{{athlete.Summary.Time.Average | time}}</td>
+                <td data-label="Total Runs" class="center">{{athlete.TotalRuns}}</td>
+                <td data-label="Best Time" class="center">{{athlete.Summary.Time.Fastest | time}}</td>
+                <td data-label="Average Time" class="center">{{athlete.Summary.Time.Average | time}}</td>
             </tr>
         {% endfor %}
     </tbody>

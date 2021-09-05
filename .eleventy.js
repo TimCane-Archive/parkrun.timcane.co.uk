@@ -23,6 +23,9 @@ module.exports = function (config) {
     config.addFilter("dateSlug", dateSlugFilter);
     config.addFilter("month", monthFilter);
 
+    config.addWatchTarget("**/_scss/theme");
+    config.setWatchThrottleWaitTime(1000);
+
     config.addPlugin(pluginSass, {
         watch: ["**/theme.scss"],
         outputDir: "dist/assets/css/",

@@ -7,8 +7,8 @@ module.exports = function () {
             .all(
                 [
                     GetAthlete(4116819), // Tim Cane
-                    GetAthlete(4431015), // Thomas Cope
-                    GetAthlete(2537134), // Rebecca Lennon
+                    //GetAthlete(4431015), // Thomas Cope
+                    //GetAthlete(2537134), // Rebecca Lennon
 
 
                     // GetAthlete(4344228), // Howard Towner
