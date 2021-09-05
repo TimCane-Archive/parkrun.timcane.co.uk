@@ -24,7 +24,7 @@ module.exports = function (config) {
     config.addFilter("month", monthFilter);
 
     config.addWatchTarget("**/_scss/theme");
-    config.setWatchThrottleWaitTime(1000);
+    config.setWatchThrottleWaitTime(5000);
 
     config.addPlugin(pluginSass, {
         watch: ["**/theme.scss"],

@@ -6,6 +6,9 @@ pagination:
     data: parkrun.dates.month
     size: 1
     alias: month
+
+eleventyComputed:
+    title: "{{ (month.Month - 1) | month }} {{ month.Year }}"
 ---
 
 <a href='/{{ hyperlink.date }}/{{ month.Year }}'>View runs in {{month.Year}}</a>

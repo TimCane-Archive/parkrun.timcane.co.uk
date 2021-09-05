@@ -6,6 +6,9 @@ pagination:
     data: parkrun.athletes
     size: 1
     alias: athlete
+
+eleventyComputed:
+    title: "{{ athlete.Name }}"
 ---
 
 <a href="/{{ hyperlink.athlete }}">View All Runners</a>

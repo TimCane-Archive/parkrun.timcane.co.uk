@@ -1,6 +1,8 @@
 ---
 permalink: "{{ hyperlink.event }}/{{ event.Event | slug }}/index.html"
 layout: page
+eleventyComputed:
+    title: "{{ event.Event }}"
 
 pagination:
     data: parkrun.events

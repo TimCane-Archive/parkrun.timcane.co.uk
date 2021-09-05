@@ -6,6 +6,9 @@ pagination:
     data: parkrun.dates.year
     size: 1
     alias: year
+
+eleventyComputed:
+    title: "{{ year.Year }}"
 ---
 
 <table class="sticky">

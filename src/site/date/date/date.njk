@@ -6,6 +6,9 @@ pagination:
     data: parkrun.dates.day
     size: 1
     alias: date
+
+eleventyComputed:
+    title: "{{date.Date | date('dS mmmm yyyy')}}"
 ---
 
 <a href='/{{ hyperlink.date }}/{{ date.Date | date('yyyy') }}/{{ date.Date | date('mm') }}'>View runs in {{date.Date | date("mmmm yyyy")}}</a>

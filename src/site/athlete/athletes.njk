@@ -1,16 +1,19 @@
 ---
 permalink: "{{ hyperlink.athlete }}/index.html"
 layout: page
+
+eleventyComputed:
+    title: "Runners"
 ---
 <table class="sticky">
     <thead>
         <tr>
             <th class="center" colspan="4">
-                <h1>Athletes</h1>
+                <h1>Runners</h1>
             </th>
         </tr>
         <tr>
-            <th class="left">Athlete</th>
+            <th class="left">Name</th>
             <th class="center">Total Runs</th>
             <th class="center">Best Time</th>
             <th class="center">Average Time</th>
@@ -19,7 +22,7 @@ layout: page
     <tbody>
         {% for athlete in parkrun.athletes %}
             <tr>
-                <td data-label="Athlete" class="left">
+                <td data-label="Name" class="left">
                     <a href="/{{ hyperlink.athlete }}/{{athlete.Name | slug}}">{{athlete.Name}}</a>
                 </td>
                 <td data-label="Total Runs" class="center">{{athlete.TotalRuns}}</td>
