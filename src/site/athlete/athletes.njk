@@ -8,7 +8,7 @@ eleventyComputed:
 <table class="sticky">
     <thead>
         <tr>
-            <th class="center" colspan="4">
+            <th class="center" colspan="5">
                 <h1>Runners</h1>
             </th>
         </tr>
@@ -17,6 +17,7 @@ eleventyComputed:
             <th class="center">Total Runs</th>
             <th class="center">Best Time</th>
             <th class="center">Average Time</th>
+            <th class="center">Last Run</th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +29,7 @@ eleventyComputed:
                 <td data-label="Total Runs" class="center">{{athlete.TotalRuns}}</td>
                 <td data-label="Best Time" class="center">{{athlete.Summary.Time.Fastest | time}}</td>
                 <td data-label="Average Time" class="center">{{athlete.Summary.Time.Average | time}}</td>
+                <td data-label="Last Run" class="center">{{athlete.LastRun | date("dS mmm yyyy")}}</td>
             </tr>
         {% endfor %}
     </tbody>

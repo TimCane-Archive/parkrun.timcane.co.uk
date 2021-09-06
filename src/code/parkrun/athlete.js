@@ -15,6 +15,8 @@ module.exports = class Athlete {
 
     Events;
 
+    LastRun;
+
     constructor($, athleteId) {
         this.Id = athleteId;
 
@@ -27,6 +29,8 @@ module.exports = class Athlete {
         this.Summary = new SummaryStats($);
 
         this.buildEventsSummary();
+
+        this.getLastRun();
     }
 
     getDetails($) {
@@ -85,6 +89,10 @@ module.exports = class Athlete {
             });
 
         this.Achievements = achievements;
+    }
+
+    getLastRun(){
+        this.LastRun =  this.Results.reduce((a, b) => (a > b.RunDate ? a : b.RunDate), new Date(0));
     }
 
     buildEventsSummary() {

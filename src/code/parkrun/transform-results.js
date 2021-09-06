@@ -142,6 +142,6 @@ function latestResults(results) {
 
     return {
         Date: latest,
-        Results: results.filter(function(r) { return r.RunDate == latest })
+        Results: results.filter(function(r) { return r.RunDate.getTime() == latest.getTime() })
     }
 }
