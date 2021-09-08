@@ -1,0 +1,16 @@
+{
+    "responseOverrides": {
+        "400": {
+            "rewrite": "/bad-request/"
+        },
+        "401": {
+            "rewrite": "/unauthorized/"
+        },
+        "403": {
+            "rewrite": "/forbidden/"
+        },
+        "404": {
+            "rewrite": "/page-not-found/"
+        }
+    }
+}
