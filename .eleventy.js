@@ -32,6 +32,12 @@ module.exports = function (config) {
         remap: true
     });
 
+    if(process.env.ELEVENTY_ENV == "dev"){
+        console.log("Running in DEV mode");
+    } else if(process.env.ELEVENTY_ENV == "prod"){
+        console.log("Building for Production");
+    }
+
     return {
         dir: {
             input: "src/site",
