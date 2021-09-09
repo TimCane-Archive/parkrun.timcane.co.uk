@@ -1,5 +1,5 @@
 const GetAthlete = require("../../code/parkrun/get-athletes");
-const { GetAllResults, GroupResultsByEvent, GroupResultsByDate, LatestResults, GroupResultsByYear, GroupResultsByMonth } = require("../../code/parkrun/transform-results");
+const { GetAllResults, GroupResultsByEvent, GroupResultsByDate, LastRun, GroupResultsByYear, GroupResultsByMonth,GetAthletesLatestRun } = require("../../code/parkrun/transform-results");
 const bottleneck = require("bottleneck");
 
 module.exports = function () {
@@ -19,7 +19,8 @@ module.exports = function () {
                             year: GroupResultsByYear(results),
                             month: GroupResultsByMonth(results)
                         },
-                        latest: LatestResults(results)
+                        lastRun: LastRun(results),
+                        latestRuns: GetAthletesLatestRun(athletes)
                     });
                 }
             )

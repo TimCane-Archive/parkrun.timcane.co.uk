@@ -92,12 +92,17 @@ table {
         tr {
             border-bottom: 1px solid $lighter-grey;
 
-            &:nth-of-type(even) {
+            &.even {
                 background-color: $light-grey;
             }
 
             &:last-of-type {
                 border-bottom: 2px solid $primary;
+            }
+
+            &.title{
+                background-color: $primary;
+                color: $white;
             }
 
             td {

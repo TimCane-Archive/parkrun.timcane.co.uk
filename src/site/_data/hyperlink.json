@@ -1,6 +1,5 @@
 {
     "event": "courses",
     "athlete": "runners",
-    "date": "dates",
-    "latest": "latest"
+    "date": "dates"
 }

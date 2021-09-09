@@ -48,8 +48,9 @@ pagination:
         </tr>
     </thead>
     <tbody>
+    {% set cls = cycler("odd", "even") %}
         {% for row in event.Results %}
-            <tr>
+            <tr class="{{ cls.next() }}">
                 <td data-label="Athlete" class="left">
                     <a href="/{{ hyperlink.athlete }}/{{row.AthleteName | slug }}">{{row.AthleteName}}</a>
                 </td>

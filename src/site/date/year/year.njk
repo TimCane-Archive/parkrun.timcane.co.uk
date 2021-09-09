@@ -62,8 +62,9 @@ eleventyComputed:
         </tr>
     </thead>
     <tbody>
+    {% set cls = cycler("odd", "even") %}
         {% for row in year.Results %}
-            <tr>
+            <tr class="{{ cls.next() }}">
                 <td data-label="Run Date" class="left">
                     <a href="/{{ hyperlink.date }}/{{row.RunDate | date('yyyy')}}/{{row.RunDate | date('mm')}}/{{row.RunDate | date('dd')}}">{{row.RunDate | date("dS mmm")}}</a>
                 </td>

@@ -1,13 +1,16 @@
 <nav>
     <ul>
         <li>
-            <a href="/{{ hyperlink.event }}">Courses</a>
+            <a href="/">Home</a>
         </li>
         <li>
-            <a href="/{{ hyperlink.athlete }}">Runners</a>
+            <a href="/{{ hyperlink.event }}/">Courses</a>
         </li>
         <li>
-            <a href="/{{ hyperlink.latest }}">Latest</a>
+            <a href="/{{ hyperlink.athlete }}/">Runners</a>
+        </li>
+        <li>
+            <a href="/{{hyperlink.date}}/{{ parkrun.lastRun | date('yyyy') }}/{{ parkrun.lastRun | date('mm') }}/{{ parkrun.lastRun | date('dd') }}/">Latest</a>
         </li>
     </ul>
 </nav>

@@ -21,8 +21,9 @@ eleventyComputed:
         </tr>
     </thead>
     <tbody>
+    {% set cls = cycler("odd", "even") %}
         {% for event in parkrun.events %}
-            <tr>
+            <tr class="{{ cls.next() }}">
                 <td data-label="Course" class="left">
                     <a href="/{{ hyperlink.event }}/{{event.Event | slug}}">{{event.Event}}</a>
                 </td>

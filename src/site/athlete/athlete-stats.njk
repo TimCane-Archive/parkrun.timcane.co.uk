@@ -10,7 +10,7 @@ pagination:
 eleventyComputed:
     title: "{{ athlete.Name }}'s Stats"
 ---
-
+{% set cls = cycler("odd", "even") %}
 <h1>{{athlete.Name}}
     <small>{{athlete.TotalRuns}} total runs!</small>
 </h1>
@@ -32,7 +32,7 @@ eleventyComputed:
     <tbody>
         {% set time = athlete.Summary.Time %}
         {% if time %}
-            <tr class="time">
+            <tr class="{{ cls.next() }}" class="time">
                 <td data-label="Stat" class="left">Time</td>
                 <td data-label="Fastest" class="center">{{time.Fastest | time}}</td>
                 <td data-label="Average (mean)" class="center">{{time.Average | time}}</td>
@@ -45,7 +45,7 @@ eleventyComputed:
         {% endif %}
         {% set grade = athlete.Summary.AgeGrade %}
         {% if grade %}
-            <tr class="grade">
+            <tr class="{{ cls.next() }}" class="grade">
                 <td data-label="Stat" class="left">Age Grade</td>
                 <td data-label="Fastest" class="center">{{grade.Fastest}}%</td>
                 <td data-label="Average (mean)" class="center">{{grade.Average}}%</td>
@@ -58,7 +58,7 @@ eleventyComputed:
         {% endif %}
         {% set oPos = athlete.Summary.OverallPosition %}
         {% if oPos %}
-            <tr class="overall-pos">
+            <tr class="{{ cls.next() }}" class="overall-pos">
                 <td data-label="Stat" class="left">Overall Position</td>
                 <td data-label="Fastest" class="center">{{oPos.Fastest}}</td>
                 <td data-label="Average (mean)" class="center">{{oPos.Average}}</td>
@@ -87,7 +87,7 @@ eleventyComputed:
     </thead>
     <tbody>
         {% for row in athlete.Achievements %}
-            <tr>
+            <tr class="{{ cls.next() }}">
                 <td data-label="Year" class="center">{{row.Year}}</td>
                 <td data-label="Best Time" class="center">{{row.BestTime | time}}</td>
                 <td data-label="Best Age Grading" class="center">{{row.BestGrade}}%</td>
@@ -116,7 +116,7 @@ eleventyComputed:
     </thead>
     <tbody>
         {% for row in athlete.Events %}
-            <tr>
+            <tr class="{{ cls.next() }}">
                 <td data-label="Course" class="left">
                     <a href="/{{ hyperlink.event }}/{{row.Event | slug }}">{{row.Event}}</a>
                 </td>

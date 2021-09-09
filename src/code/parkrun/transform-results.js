@@ -2,9 +2,10 @@ module.exports = {
     GetAllResults: getAllResults,
     GroupResultsByEvent: groupResultsByEvent,
     GroupResultsByDate: groupResultsByDate,
-    LatestResults: latestResults,
+    LastRun: lastRun,
     GroupResultsByYear: groupResultsByYear,
-    GroupResultsByMonth:groupResultsByMonth
+    GroupResultsByMonth:groupResultsByMonth,
+    GetAthletesLatestRun: getAthletesLatestRun
 };
 
 
@@ -136,12 +137,21 @@ function groupResultsByMonth(results) {
 }
 
 
-function latestResults(results) {
+function lastRun(results) {
+    return results.reduce((a, b) => (a > b.RunDate ? a : b.RunDate), new Date(0));
+}
 
-    var latest = results.reduce((a, b) => (a > b.RunDate ? a : b.RunDate), new Date(0));
+function getAthletesLatestRun(athletes){
+    let latestRuns = [];
 
-    return {
-        Date: latest,
-        Results: results.filter(function(r) { return r.RunDate.getTime() == latest.getTime() })
+    for (const athlete of athletes) {
+            const run = Object.assign({}, athlete.Results[0]);
+
+            run.AthleteName = athlete.Name;
+            run.AthleteId = athlete.Id;
+
+            latestRuns.push(run);
     }
+
+    return groupResultsByDate(latestRuns);
 }

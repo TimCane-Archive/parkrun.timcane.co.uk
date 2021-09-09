@@ -50,8 +50,9 @@ eleventyComputed:
         </tr>
     </thead>
     <tbody>
+    {% set cls = cycler("odd", "even") %}
         {% for row in athlete.Results %}
-            <tr>
+            <tr class="{{ cls.next() }}">
                 <td data-label="Course" class="left">
                     <a href="/{{ hyperlink.event }}/{{row.Event | slug }}">{{row.Event}}</a>
                 </td>
