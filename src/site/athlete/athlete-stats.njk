@@ -34,9 +34,9 @@ eleventyComputed:
         {% if time %}
             <tr class="{{ cls.next() }}" class="time">
                 <td data-label="Stat" class="left">Time</td>
-                <td data-label="Fastest" class="center">{{time.Fastest | time}}</td>
-                <td data-label="Average (mean)" class="center">{{time.Average | time}}</td>
-                <td data-label="Slowest" class="center">{{time.Slowest | time}}</td>
+                <td data-value="{{time.Fastest}}" data-label="Fastest" class="center">{{time.Fastest | time}}</td>
+                <td data-value="{{time.Average}}" data-label="Average (mean)" class="center">{{time.Average | time}}</td>
+                <td data-value="{{time.Slowest}}" data-label="Slowest" class="center">{{time.Slowest | time}}</td>
             </tr>
         {% else %}
             <tr class="time empty">
@@ -47,9 +47,9 @@ eleventyComputed:
         {% if grade %}
             <tr class="{{ cls.next() }}" class="grade">
                 <td data-label="Stat" class="left">Age Grade</td>
-                <td data-label="Fastest" class="center">{{grade.Fastest}}%</td>
-                <td data-label="Average (mean)" class="center">{{grade.Average}}%</td>
-                <td data-label="Slowest" class="center">{{grade.Slowest}}%</td>
+                <td data-value="{{grade.Fastest}}" data-label="Fastest" class="center">{{grade.Fastest}}%</td>
+                <td data-value="{{grade.Average}}" data-label="Average (mean)" class="center">{{grade.Average}}%</td>
+                <td data-value="{{grade.Slowest}}" data-label="Slowest" class="center">{{grade.Slowest}}%</td>
             </tr>
         {% else %}
             <tr class="grade empty">
@@ -60,9 +60,9 @@ eleventyComputed:
         {% if oPos %}
             <tr class="{{ cls.next() }}" class="overall-pos">
                 <td data-label="Stat" class="left">Overall Position</td>
-                <td data-label="Fastest" class="center">{{oPos.Fastest}}</td>
-                <td data-label="Average (mean)" class="center">{{oPos.Average}}</td>
-                <td data-label="Slowest" class="center">{{oPos.Slowest}}</td>
+                <td data-value="{{oPos.Fastest}}" data-label="Fastest" class="center">{{oPos.Fastest}}</td>
+                <td data-value="{{oPos.Average}}" data-label="Average (mean)" class="center">{{oPos.Average}}</td>
+                <td data-value="{{oPos.Slowest}}" data-label="Slowest" class="center">{{oPos.Slowest}}</td>
             </tr>
         {% else %}
             <tr class="overall-pos empty">
@@ -80,17 +80,17 @@ eleventyComputed:
             </th>
         </tr>
         <tr>
-            <th class="center">Year</th>
-            <th class="center">Best Time</th>
-            <th class="center">Best Age Grading</th>
+            <th onclick="sort(this,0,'number')" class="center">Year</th>
+            <th onclick="sort(this,1,'number')" class="center">Best Time</th>
+            <th onclick="sort(this,2,'number')" class="center">Best Age Grading</th>
         </tr>
     </thead>
     <tbody>
         {% for row in athlete.Achievements %}
             <tr class="{{ cls.next() }}">
-                <td data-label="Year" class="center">{{row.Year}}</td>
-                <td data-label="Best Time" class="center">{{row.BestTime | time}}</td>
-                <td data-label="Best Age Grading" class="center">{{row.BestGrade}}%</td>
+                <td data-value="{{row.Year}}" data-label="Year" class="center">{{row.Year}}</td>
+                <td data-value="{{row.BestTime}}" data-label="Best Time" class="center">{{row.BestTime | time}}</td>
+                <td data-value="{{row.BestGrade}}" data-label="Best Age Grading" class="center">{{row.BestGrade}}%</td>
             </tr>
         {% else %}
             <tr>
@@ -108,21 +108,21 @@ eleventyComputed:
             </th>
         </tr>
         <tr>
-            <th class="left">Course</th>
-            <th class="center">Runs</th>
-            <th class="center">Best Position</th>
-            <th class="center">Best Time</th>
+            <th onclick="sort(this,0,'string')" class="left">Course</th>
+            <th onclick="sort(this,1,'number')" class="center">Runs</th>
+            <th onclick="sort(this,2,'number')" class="center">Best Position</th>
+            <th onclick="sort(this,3,'number')" class="center">Best Time</th>
         </tr>
     </thead>
     <tbody>
         {% for row in athlete.Events %}
             <tr class="{{ cls.next() }}">
-                <td data-label="Course" class="left">
+                <td data-value="{{row.Event | lower }}" data-label="Course" class="left">
                     <a href="/{{ hyperlink.event }}/{{row.Event | slug }}">{{row.Event}}</a>
                 </td>
-                <td data-label="Runs" class="center">{{row.Runs}}</td>
-                <td data-label="Best Position" class="center">{{row.BestPosition}}</td>
-                <td data-label="Best Time" class="center">{{row.BestTime | time}}</td>
+                <td data-value="{{row.Runs}}" data-label="Runs" class="center">{{row.Runs}}</td>
+                <td data-value="{{row.BestPosition}}" data-label="Best Position" class="center">{{row.BestPosition}}</td>
+                <td data-value="{{row.BestTime}}" data-label="Best Time" class="center">{{row.BestTime | time}}</td>
             </tr>
         {% else %}
             <tr>

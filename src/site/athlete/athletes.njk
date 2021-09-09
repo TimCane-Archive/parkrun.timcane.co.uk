@@ -13,26 +13,26 @@ eleventyComputed:
             </th>
         </tr>
         <tr>
-            <th class="left">Name</th>
-            <th class="left">Last Run</th>
-            <th class="center">Total Runs</th>
-            <th class="center">Best Time</th>
-            <th class="center">Average Time</th>
+            <th onclick="sort(this,0,'string')" class="left">Name</th>
+            <th onclick="sort(this,1,'string')" class="left">Last Run</th>
+            <th onclick="sort(this,2,'number')" class="center">Total Runs</th>
+            <th onclick="sort(this,3,'number')" class="center">Best Time</th>
+            <th onclick="sort(this,4,'number')" class="center">Average Time</th>
         </tr>
     </thead>
     <tbody>
     {% set cls = cycler("odd", "even") %}
         {% for athlete in parkrun.athletes %}
             <tr class="{{ cls.next() }}">
-                <td data-label="Name" class="left">
+                <td data-value="{{athlete.Name | lower }}" data-label="Name" class="left">
                     <a href="/{{ hyperlink.athlete }}/{{athlete.Name | slug}}">{{athlete.Name}}</a>
                 </td>
-                <td data-label="Last Run" class="left">
+                <td data-value="{{athlete.LastRun.getTime()}}" data-label="Last Run" class="left">
                     <a href="/{{hyperlink.date}}/{{ athlete.LastRun | date('yyyy') }}/{{ athlete.LastRun | date('mm') }}/{{ athlete.LastRun | date('dd') }}/">{{athlete.LastRun | date("dS mmm yyyy")}}</a>
                 </td>
-                <td data-label="Total Runs" class="center">{{athlete.TotalRuns}}</td>
-                <td data-label="Best Time" class="center">{{athlete.Summary.Time.Fastest | time}}</td>
-                <td data-label="Average Time" class="center">{{athlete.Summary.Time.Average | time}}</td>
+                <td data-value="{{athlete.TotalRuns}}" data-label="Total Runs" class="center">{{athlete.TotalRuns}}</td>
+                <td data-value="{{athlete.Summary.Time.Fastest}}" data-label="Best Time" class="center">{{athlete.Summary.Time.Fastest | time}}</td>
+                <td data-value="{{athlete.Summary.Time.Average}}" data-label="Average Time" class="center">{{athlete.Summary.Time.Average | time}}</td>
             </tr>
         {% endfor %}
     </tbody>

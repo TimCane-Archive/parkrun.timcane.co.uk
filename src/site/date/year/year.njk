@@ -35,28 +35,28 @@ eleventyComputed:
             </th>
         </tr>
         <tr>
-            <th class="left">
+            <th onclick="sort(this,0,'string')" class="left">
                 Run Date
             </th>
-            <th class="left">
+            <th onclick="sort(this,1,'string')" class="left">
                 Athlete
             </th>
-            <th class="left">
+            <th onclick="sort(this,2,'string')" class="left">
                Course
             </th>
-            <th class="center">
+            <th onclick="sort(this,3,'number')" class="center">
                 Run #
             </th>
-            <th class="center">
+            <th onclick="sort(this,4,'number')" class="center">
                 Position
             </th>
-            <th class="center">
+            <th onclick="sort(this,5,'number')" class="center">
                 Time
             </th>
-            <th class="center">
+            <th onclick="sort(this,6,'number')" class="center">
                 Age Grade
             </th>
-            <th class="center">
+            <th onclick="sort(this,7,'boolean')" class="center">
                 PB?
             </th>
         </tr>
@@ -65,22 +65,22 @@ eleventyComputed:
     {% set cls = cycler("odd", "even") %}
         {% for row in year.Results %}
             <tr class="{{ cls.next() }}">
-                <td data-label="Run Date" class="left">
+                <td data-value="{{row.RunDate.getTime()}}" data-label="Run Date" class="left">
                     <a href="/{{ hyperlink.date }}/{{row.RunDate | date('yyyy')}}/{{row.RunDate | date('mm')}}/{{row.RunDate | date('dd')}}">{{row.RunDate | date("dS mmm")}}</a>
                 </td>
-                <td data-label="Athlete" class="left">
+                <td data-value="{{row.AthleteName | lower}}"  data-label="Athlete" class="left">
                     <a href="/{{ hyperlink.athlete }}/{{row.AthleteName | slug }}">{{row.AthleteName}}</a>
                 </td>
-                <td data-label="Course" class="left">
+                <td data-value="{{row.Event | lower}}"  data-label="Course" class="left">
                     <a href="/{{ hyperlink.event }}/{{row.Event | slug }}">{{row.Event}}</a>
                 </td>
-                <td data-label="Run #" class="center">
+                <td data-value="{{row.RunNumber}}" data-label="Run #" class="center">
                     <a href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunNumber}}</a>
                 </td>
-                <td data-label="Position" class="center">{{row.Position}}</td>
-                <td data-label="Time" class="center">{{row.Time | time}}</td>
-                <td data-label="Age Grade" class="center">{{row.AgeGrade}}%</td>
-                <td data-label="PB?" class="center">
+                <td data-value="{{row.Position}}" data-label="Position" class="center">{{row.Position}}</td>
+                <td data-value="{{row.Time}}" data-label="Time" class="center">{{row.Time | time}}</td>
+                <td data-value="{{row.AgeGrade}}" data-label="Age Grade" class="center">{{row.AgeGrade}}%</td>
+                <td data-value="{{row.PB}}" data-label="PB?" class="center">
                     {% if row.PB %}
                         {% include "pb-medal.svg" %}
                     {% else %}
