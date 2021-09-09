@@ -11,8 +11,16 @@ eleventyComputed:
     title: "{{ athlete.Name }}"
 ---
 
-<a href="/{{ hyperlink.athlete }}">View All Runners</a>
-<a href="/{{ hyperlink.athlete }}/{{athlete.Name | slug}}/stats">Stats</a>
+<nav>
+    <ul>
+        <li>
+            <a href="/{{ hyperlink.athlete }}">View All Runners</a>
+        </li>
+        <li>
+            <a href="/{{ hyperlink.athlete }}/{{athlete.Name | slug}}/stats">Stats</a>
+        </li>
+    </ul>
+</nav>
 
 <table class="sticky">
     <thead>
@@ -50,7 +58,7 @@ eleventyComputed:
         </tr>
     </thead>
     <tbody>
-    {% set cls = cycler("odd", "even") %}
+        {% set cls = cycler("odd", "even") %}
         {% for row in athlete.Results %}
             <tr class="{{ cls.next() }}">
                 <td data-label="Course" class="left">

@@ -10,7 +10,13 @@ pagination:
     alias: event
 ---
 
-<a href="/{{ hyperlink.event }}">View All Courses</a>
+<nav>
+    <ul>
+        <li>
+            <a href="/{{ hyperlink.event }}">View All Courses</a>
+        </li>
+    </ul>
+</nav>
 
 <table class="sticky">
     <thead>
@@ -48,7 +54,7 @@ pagination:
         </tr>
     </thead>
     <tbody>
-    {% set cls = cycler("odd", "even") %}
+        {% set cls = cycler("odd", "even") %}
         {% for row in event.Results %}
             <tr class="{{ cls.next() }}">
                 <td data-label="Athlete" class="left">

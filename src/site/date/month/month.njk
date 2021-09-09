@@ -11,7 +11,13 @@ eleventyComputed:
     title: "{{ (month.Month - 1) | month }} {{ month.Year }}"
 ---
 
-<a href='/{{ hyperlink.date }}/{{ month.Year }}'>View runs in {{month.Year}}</a>
+<nav>
+    <ul>
+        <li>
+            <a href='/{{ hyperlink.date }}/{{ month.Year }}'>View runs in {{month.Year}}</a>
+        </li>
+    </ul>
+</nav>
 
 <table class="sticky">
     <thead>
@@ -65,7 +71,7 @@ eleventyComputed:
         </tr>
     </thead>
     <tbody>
-    {% set cls = cycler("odd", "even") %}
+        {% set cls = cycler("odd", "even") %}
         {% for row in month.Results %}
             <tr class="{{ cls.next() }}">
                 <td data-label="Run Date" class="left">

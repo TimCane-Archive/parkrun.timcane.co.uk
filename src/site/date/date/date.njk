@@ -11,7 +11,13 @@ eleventyComputed:
     title: "{{date.Date | date('dS mmmm yyyy')}}"
 ---
 
-<a href='/{{ hyperlink.date }}/{{ date.Date | date('yyyy') }}/{{ date.Date | date('mm') }}'>View runs in {{date.Date | date("mmmm yyyy")}}</a>
+<nav>
+    <ul>
+        <li>
+            <a href='/{{ hyperlink.date }}/{{ date.Date | date('yyyy') }}/{{ date.Date | date('mm') }}'>View runs in {{date.Date | date("mmmm yyyy")}}</a>
+        </li>
+    </ul>
+</nav>
 
 <table class="sticky">
     <thead>
@@ -61,7 +67,7 @@ eleventyComputed:
         </tr>
     </thead>
     <tbody>
-    {% set cls = cycler("odd", "even") %}
+        {% set cls = cycler("odd", "even") %}
         {% for row in date.Results %}
             <tr class="{{ cls.next() }}">
                 <td data-label="Athlete" class="left">
