@@ -1,4 +1,14 @@
+---
+permalink: staticwebapp.config.json
+layout: api
+---
 {
+    "routes": [
+        {
+        "route": "/latest",
+        "redirect": "/{{hyperlink.date}}/{{ parkrun.latest.Date | date('yyyy') }}/{{ parkrun.latest.Date | date('mm') }}/{{ parkrun.latest.Date | date('dd') }}/"
+        }
+    ],
     "responseOverrides": {
         "400": {
             "rewrite": "/bad-request/"
