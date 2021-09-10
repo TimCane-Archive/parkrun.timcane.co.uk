@@ -1,56 +1,55 @@
-function sort(el, n, type) {
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = el.closest("table").tBodies[0];
-    switching = true;
-    // Set the sorting direction to ascending:
-    dir = "asc";
-    /* Make a loop that will continue until
-    no switching has been done: */
-    while (switching) {
-        // Start by saying: no switching is done:
-        switching = false;
-        rows = table.rows;
-        /* Loop through all table rows (except the
-        first, which contains table headers): */
-        for (i = 0; i < (rows.length - 1); i++) {
-            // Start by saying there should be no switching:
-            shouldSwitch = false;
-            /* Get the two elements you want to compare,
-            one from current row and one from the next: */
-            x = rows[i].getElementsByTagName("td")[n];
-            y = rows[i + 1].getElementsByTagName("td")[n];
-            /* Check if the two rows should switch place,
-            based on the direction, asc or desc: */
-            if (dir == "asc") {
-                if (value(x.attributes["data-value"].value, type) > value(y.attributes["data-value"].value, type)) {
-                    // If so, mark as a switch and break the loop:
-                    shouldSwitch = true;
-                    break;
-                }
-            } else if (dir == "desc") {
-                if (value(x.attributes["data-value"].value, type) < value(y.attributes["data-value"].value, type)) {
-                    // If so, mark as a switch and break the loop:
-                    shouldSwitch = true;
-                    break;
-                }
-            }
-        }
-        if (shouldSwitch) {
-            /* If a switch has been marked, make the switch
-            and mark that a switch has been done: */
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
-            // Each time a switch is done, increase this count by 1:
-            switchcount++;
-        } else {
-            /* If no switching has been done AND the direction is "asc",
-            set the direction to "desc" and run the while loop again. */
-            if (switchcount == 0 && dir == "asc") {
-                dir = "desc";
-                switching = true;
-            }
+function sort(el, col, dataType) {
+    let table = el.closest("table");
+    let tbody = table.tBodies[0];
+
+    let asc = getSortDirection(el, table);
+
+    let placeholder = document.createElement('tbody');
+
+    table.replaceChild(placeholder, tbody);
+    tbody = sortRows(tbody, col, dataType, asc);
+    table.replaceChild(tbody, placeholder);
+}
+
+function getSortDirection(el,table){
+    let asc = true;
+
+    if (el.hasAttribute("data-sort")) {
+        let sortDir = el.getAttribute("data-sort");
+        if (sortDir == "asc") {
+            asc = false;
+        } else if (sortDir == "desc") {
+            asc = true;
         }
     }
+
+    let sortedCols = table.querySelectorAll("[data-sort]");
+    for (const sortedCol of sortedCols) {
+        sortedCol.removeAttribute("data-sort")
+    }
+
+    el.setAttribute("data-sort", (asc ? "asc" : "desc"));
+
+    return asc;
+}
+
+function sortRows(tbody, col, dataType, ascending) {
+    const rows = Array.from(tbody.rows);
+
+    rows.sort(
+        (x, y) => {
+            let xVal = value(x.cells[col].attributes["data-value"].value, dataType);
+            let yVal = value(y.cells[col].attributes["data-value"].value, dataType);
+
+            return xVal == yVal ? 0 : xVal < yVal ? (ascending ? -1 : 1) : (ascending ? 1 : -1);
+        }
+    )
+
+    for (let row of rows) {
+        tbody.appendChild(row);
+    }
+
+    return tbody;
 }
 
 function value(val, type) {

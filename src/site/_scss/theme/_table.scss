@@ -87,6 +87,24 @@ table {
             color: $white;
             text-align: left;
         }
+
+        th {
+            position: relative;
+            &:after {
+                position: absolute;
+                font-family: monospace;
+                top: 50%;
+                transform: translateY(-50%);
+                padding: 0 5px;
+            }
+            &[data-sort="asc"]:after {
+                content: "▲";
+            }
+
+            &[data-sort="desc"]:after {
+                content: "▼";
+            }
+        }
     }
     tbody {
         tr {
@@ -100,7 +118,7 @@ table {
                 border-bottom: 2px solid $primary;
             }
 
-            &.title{
+            &.title {
                 background-color: $primary;
                 color: $white;
             }

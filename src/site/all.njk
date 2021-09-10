@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: all-results/index.html
+permalink: all/index.html
 
 title: All Results
 ---
@@ -8,10 +8,14 @@ title: All Results
 <table class="sticky">
     <thead>
         <tr>
-            <th colspan="8" class="center">
+            <th colspan="7" class="center">
                 <h1>
                     All Results
                 </h1>
+            </th>
+            <th class="center">
+                <div>Total Runs</div>
+                <div>{{parkrun.results | length}}</div>
             </th>
         </tr>
         <tr>
@@ -19,10 +23,10 @@ title: All Results
                 Athlete
             </th>
             <th onclick="sort(this,1,'string')" class="left">
-               Course
+                Course
             </th>
-            <th onclick="sort(this,2,'number')"  class="left">
-               Run Date
+            <th onclick="sort(this,2,'number')" class="left">
+                Run Date
             </th>
             <th onclick="sort(this,3,'number')" class="center">
                 Run #
@@ -44,34 +48,37 @@ title: All Results
     <tbody>
         {% set cls = cycler("odd", "even") %}
         {% for row in parkrun.results %}
-            <tr class="{{ cls.next() }}">
-                <td data-value="{{row.AthleteName | lower}}" data-label="Athlete" class="left">
-                    <a href="/{{ hyperlink.athlete }}/{{row.AthleteName | slug }}">{{row.AthleteName}}</a>
-                </td>
-                <td data-value="{{row.RunDate.getTime()}}" data-label="Run Date" class="left">
-                    <a href="/{{ hyperlink.date }}/{{row.RunDate | date('yyyy')}}/{{row.RunDate | date('mm')}}/{{row.RunDate | date('dd')}}">{{row.RunDate | date("dS mmm yyyy")}}</a>
-                </td>
-                <td data-value="{{row.Event | lower}}" data-label="Course" class="left">
-                    <a href="/{{ hyperlink.event }}/{{row.Event | slug }}">{{row.Event}}</a>
-                </td>
-                <td data-value="{{row.RunNumber}}" data-label="Run #" class="center">
-                    <a href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunNumber}}</a>
-                </td>
-                <td data-value="{{row.Position}}" data-label="Position" class="center">{{row.Position}}</td>
-                <td data-value="{{row.Time}}" data-label="Time" class="center">{{row.Time | time}}</td>
-                <td data-value="{{row.AgeGrade}}" data-label="Age Grade" class="center">{{row.AgeGrade}}%</td>
-                <td data-value="{{row.PB}}" data-label="PB?" class="center">
-                    {% if row.PB %}
-                        {% include "pb-medal.svg" %}
-                    {% else %}
-                    &nbsp;
-                    {% endif %}
-                </td>
-            </tr>
+        <tr class="{{ cls.next() }}">
+            <td data-value="{{row.AthleteName | lower}}" data-label="Athlete" class="left">
+                <a href="/{{ hyperlink.athlete }}/{{row.AthleteName | slug }}">{{row.AthleteName}}</a>
+            </td>
+            <td data-value="{{row.Event | lower}}" data-label="Course" class="left">
+                <a href="/{{ hyperlink.event }}/{{row.Event | slug }}">{{row.Event}}</a>
+            </td>
+            <td data-value="{{row.RunDate.getTime()}}" data-label="Run Date" class="left">
+                <a
+                    href="/{{ hyperlink.date }}/{{row.RunDate | date('yyyy')}}/{{row.RunDate | date('mm')}}/{{row.RunDate | date('dd')}}">{{row.RunDate
+                    | date("dS mmm yyyy")}}</a>
+            </td>
+            <td data-value="{{row.RunNumber}}" data-label="Run #" class="center">
+                <a
+                    href="http://www.parkrun.org.uk/{{row.Event | slug }}/results/weeklyresults?runSeqNumber={{row.RunNumber}}">{{row.RunNumber}}</a>
+            </td>
+            <td data-value="{{row.Position}}" data-label="Position" class="center">{{row.Position}}</td>
+            <td data-value="{{row.Time}}" data-label="Time" class="center">{{row.Time | time}}</td>
+            <td data-value="{{row.AgeGrade}}" data-label="Age Grade" class="center">{{row.AgeGrade}}%</td>
+            <td data-value="{{row.PB}}" data-label="PB?" class="center">
+                {% if row.PB %}
+                {% include "pb-medal.svg" %}
+                {% else %}
+                &nbsp;
+                {% endif %}
+            </td>
+        </tr>
         {% else %}
-            <tr>
-                <td class="center" colspan="7">Nothing to show</td>
-            </tr>
+        <tr>
+            <td class="center" colspan="7">Nothing to show</td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>
