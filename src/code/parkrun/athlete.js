@@ -34,13 +34,16 @@ module.exports = class Athlete {
     }
 
     getDetails($) {
-        var heading = $("#content h2")
+        var name = $("#content h2")
             .first()
             .text();
-        heading = heading.split("-");
 
-        this.Name = toTitleCase(heading[0].trim());
-        this.TotalRuns = parseInt(heading[1].split("<br>")[0].match(/\d+/));
+        var totalRuns = $("#content h3")
+            .first()
+            .text();
+
+        this.Name = toTitleCase(name.trim());
+        this.TotalRuns = parseInt(totalRuns.match(/\d+/));
     }
 
     getResults($) {
