@@ -153,5 +153,17 @@ function getAthletesLatestRun(athletes){
             latestRuns.push(run);
     }
 
-    return groupResultsByDate(latestRuns);
+    let groups = groupResultsByDate(latestRuns);
+
+    groups.sort(function(a, b){
+        if(a.Date > b.Date){
+            return -1;
+        } else if(b.Date > a.Date){
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+
+    return groups;
 }
