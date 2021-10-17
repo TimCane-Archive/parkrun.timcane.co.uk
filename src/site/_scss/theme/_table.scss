@@ -119,8 +119,9 @@ table {
             }
 
             &.title {
-                background-color: $primary;
-                color: $white;
+                border-bottom: 1px solid $primary;
+                color: $primary;
+                background-color: #E6E6E6;
             }
 
             td {
