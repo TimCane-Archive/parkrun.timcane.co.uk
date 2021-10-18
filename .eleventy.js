@@ -1,5 +1,3 @@
-const pluginSass = require("eleventy-plugin-sass");
-
 const cleanBoolFilter = require("./src/code/filters/clean-bool.filter")
 const jsonFilter = require("./src/code/filters/json.filter")
 const noNoFilter = require("./src/code/filters/no-no.filter")
@@ -22,15 +20,6 @@ module.exports = function (config) {
     config.addFilter("date", dateFilter);
     config.addFilter("dateSlug", dateSlugFilter);
     config.addFilter("month", monthFilter);
-
-    config.addWatchTarget("**/_scss/theme");
-    config.setWatchThrottleWaitTime(5000);
-
-    config.addPlugin(pluginSass, {
-        watch: ["**/theme.scss"],
-        outputDir: "dist/assets/css/",
-        remap: true
-    });
 
     if(process.env.ELEVENTY_ENV == "dev"){
         console.log("Running in DEV mode");
