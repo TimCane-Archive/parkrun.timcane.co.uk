@@ -13,7 +13,8 @@ module.exports = {
   GroupByYear: groupByYear,
 };
 
-function groupByDay(results) {
+function groupByDay(allRuns) {
+  let results = allRuns.Results;
   let dates = [];
 
   let groups = GroupBy(results, "RunDate");
@@ -36,7 +37,8 @@ function groupByDay(results) {
   return dates;
 }
 
-function groupByMonth(results) {
+function groupByMonth(allRuns) {
+  let results = allRuns.Results;
   let output = [];
 
   var groups = results.reduce(function (rv, x) {
@@ -66,7 +68,8 @@ function groupByMonth(results) {
   return output;
 }
 
-function groupByYear(results) {
+function groupByYear(allRuns) {
+  let results = allRuns.Results;
   let output = [];
 
   var groups = results.reduce(function (rv, x) {
@@ -91,7 +94,8 @@ function groupByYear(results) {
   return output;
 }
 
-function groupByCourse(results) {
+function groupByCourse(allRuns) {
+  let results = allRuns.Results;
   let courses = [];
 
   let groups = GroupBy(results, "Event");
@@ -110,7 +114,8 @@ function groupByCourse(results) {
   return courses;
 }
 
-function groupByRunner(results) {
+function groupByRunner(allRuns) {
+  let results = allRuns.Results;
   let runners = [];
 
   let groups = GroupBy(results, "AthleteId");

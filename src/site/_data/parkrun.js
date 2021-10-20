@@ -5,17 +5,17 @@ const { GetLatestRunDate } = require("../../code/parkrun/results");
 module.exports = function () {
   return new Promise((resolve, reject) => {
     ScrapeResults()
-      .then((results) => {
+      .then((allRuns) => {
         resolve({
-          results: results,
-          courses: GroupByCourse(results),
-          runners: GroupByRunner(results),
+          results: allRuns,
+          courses: GroupByCourse(allRuns),
+          runners: GroupByRunner(allRuns),
           dates: {
-            year: GroupByYear(results),
-            month: GroupByMonth(results),
-            day: GroupByDay(results)
+            year: GroupByYear(allRuns),
+            month: GroupByMonth(allRuns),
+            day: GroupByDay(allRuns)
           },
-          lastRun: GetLatestRunDate(results)
+          lastRun: GetLatestRunDate(allRuns)
         });
       })
       .catch((error) => {

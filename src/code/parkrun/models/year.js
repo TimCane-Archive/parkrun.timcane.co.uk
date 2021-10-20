@@ -1,6 +1,6 @@
-const BaseModel = require("./base-model")
+const Base = require("./base")
 
-module.exports = class Year extends BaseModel {
+module.exports = class Year extends Base {
     constructor() {
       super()
     }

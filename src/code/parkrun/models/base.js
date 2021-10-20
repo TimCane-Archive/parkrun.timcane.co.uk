@@ -1,4 +1,4 @@
-module.exports = class BaseModel {
+module.exports = class Base {
     constructor(){}
 
     Results;
