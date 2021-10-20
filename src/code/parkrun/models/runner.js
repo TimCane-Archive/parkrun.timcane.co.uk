@@ -1,6 +1,6 @@
 const Base = require("./base")
 
-module.exports = class Athlete extends Base {
+module.exports = class Runner extends Base {
     constructor() {
       super()
     }
