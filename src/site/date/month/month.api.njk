@@ -1,0 +1,10 @@
+---
+permalink: "dates/{{ month.Year }}/{{ month.Month }}/data.json"
+layout: api
+
+pagination:
+    data: parkrun.dates.month
+    size: 1
+    alias: month
+---
+{{month | json | safe }}

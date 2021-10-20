@@ -1,0 +1,10 @@
+---
+permalink: "courses/{{ course.Name | slug }}/data.json"
+layout: api
+
+pagination:
+    data: parkrun.courses
+    size: 1
+    alias: course
+---
+{{course | json | safe}}

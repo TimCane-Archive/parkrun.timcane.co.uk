@@ -1,0 +1,10 @@
+---
+permalink: "runners/{{ runner.Name | slug }}/data.json"
+layout: api
+
+pagination:
+    data: parkrun.runners
+    size: 1
+    alias: runner
+---
+{{runner | json | safe}}
