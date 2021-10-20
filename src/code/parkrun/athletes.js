@@ -4,8 +4,7 @@ module.exports = {
 
 function getAthleteIds(){
     let athleteIds = [
-        4116819, // Tim Cane
-        4431015, // Thomas Cope
+        4116819, // Tim Cane 
     ]
 
     if(process.env.ELEVENTY_ENV == "prod"){

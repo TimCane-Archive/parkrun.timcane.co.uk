@@ -4,10 +4,10 @@ const { GetResultsForAthlete, OrderResultsByRunDate } = require("./results");
 const { Flatten } = require("../utils/flatten");
 
 module.exports = {
-  ScrapeData: scrapeData,
+  ScrapeResults: scrapeResults,
 };
 
-function scrapeData() {
+function scrapeResults() {
   return new Promise((resolve, reject) => {
     doWork()
       .then((data) => {

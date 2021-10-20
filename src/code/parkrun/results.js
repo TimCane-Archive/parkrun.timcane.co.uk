@@ -5,6 +5,7 @@ const cheerio = require("cheerio");
 module.exports = {
   GetResultsForAthlete: getResultsForAthlete,
   OrderResultsByRunDate: orderResultsByRunDate,
+  GetLatestRunDate: getLatestRunDate
 };
 
 function getResultsForAthlete(athleteId) {
@@ -36,4 +37,8 @@ function orderResultsByRunDate(results) {
       return 0;
     }
   });
+}
+
+function getLatestRunDate(results){
+    return results.reduce((a, b) => (a > b.RunDate ? a : b.RunDate), new Date(0));
 }

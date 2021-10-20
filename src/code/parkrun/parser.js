@@ -48,5 +48,5 @@ function getResults($, athlete) {
       results.push(result);
     });
 
-    return results;
+  return results;
 }
