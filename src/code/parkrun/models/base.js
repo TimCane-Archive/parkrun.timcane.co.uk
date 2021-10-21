@@ -1,19 +1,19 @@
 module.exports = class Base {
   constructor() {}
 
-  Results;
-  WithResults(val) {
-    this.Results = val;
+  Runs;
+  WithRuns(val) {
+    this.Runs = val;
     return this;
   }
 
   get Total() {
-    return this.Results.length;
+    return this.Runs.length;
   }
 
   toJSON() {
     return {
-      results: this.Results,
+      runs: this.Runs,
       total: this.Total,
     };
   }

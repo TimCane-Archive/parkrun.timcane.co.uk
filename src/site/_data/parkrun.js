@@ -1,21 +1,19 @@
-const { ScrapeResults } = require("../../code/parkrun");
-const { GroupByCourse, GroupByRunner, GroupByDay, GroupByMonth, GroupByYear } = require("../../code/parkrun/group");
-const { GetLatestRunDate } = require("../../code/parkrun/results");
+const { ScrapeRuns } = require("../../code/parkrun");
 
 module.exports = function () {
   return new Promise((resolve, reject) => {
-    ScrapeResults()
-      .then((allRuns) => {
+    ScrapeRuns()
+      .then((root) => {
         resolve({
-          results: allRuns,
-          courses: GroupByCourse(allRuns),
-          runners: GroupByRunner(allRuns),
+          results: root,
+          courses: root.ByCourse(),
+          runners: root.ByRunner(),
           dates: {
-            year: GroupByYear(allRuns),
-            month: GroupByMonth(allRuns),
-            day: GroupByDay(allRuns)
+            year: root.ByYear(),
+            month: root.ByMonth(),
+            day: root.ByDay()
           },
-          lastRun: GetLatestRunDate(allRuns)
+          lastRun: root.LatestDate
         });
       })
       .catch((error) => {

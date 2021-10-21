@@ -1,14 +1,14 @@
 const toTitleCase = require("../utils/to-title-case");
 const toDate = require("../utils/to-date");
 const toSeconds = require("../utils/to-seconds");
-const Result = require("./models/result");
+const Run = require("./models/run");
 const cheerio = require("cheerio");
 
 module.exports = {
-  ParseResultsFromHtml: parseResultsFromHtml,
+  ParseRunsFromHtml: parseRunsFromHtml,
 };
 
-function parseResultsFromHtml(html, athleteId) {
+function parseRunsFromHtml(html, athleteId) {
   const $ = cheerio.load(html);
 
   let athleteInfo = {
@@ -16,24 +16,24 @@ function parseResultsFromHtml(html, athleteId) {
     Name: getAthleteName($),
   };
 
-  let results = getResults($, athleteInfo);
+  let runs = getRuns($, athleteInfo);
 
-  return results;
+  return runs;
 }
 
 function getAthleteName($) {
   return toTitleCase($("#content h2").first().text().trim());
 }
 
-function getResults($, athlete) {
-  var resultsTable = $("#results")[2];
+function getRuns($, athlete) {
+  var runsTable = $("#results")[2];
 
-  let results = [];
+  let runs = [];
 
-  $(resultsTable)
+  $(runsTable)
     .find("tbody > tr")
     .each(function (i, row) {
-      var result = new Result()
+      var run = new Run()
         .WithAthleteName(athlete.Name)
         .WithAthleteId(athlete.Id)
 
@@ -45,8 +45,8 @@ function getResults($, athlete) {
         .WithAgeGrade(parseFloat($(row.children[5]).text()))
         .WithPB($(row.children[6]).text().trim() == "PB");
 
-      results.push(result);
+      runs.push(run);
     });
 
-  return results;
+  return runs;
 }

@@ -1,32 +1,26 @@
 const { GetAthletesPage } = require("./web");
-const { ParseResultsFromHtml } = require("./parser");
+const { ParseRunsFromHtml } = require("./parser");
 const cheerio = require("cheerio");
 
 module.exports = {
-  GetResultsForAthlete: getResultsForAthlete,
-  GetLatestRunDate: getLatestRunDate,
+  GetRunsForAthlete: getRunsForAthlete
 };
 
-function getResultsForAthlete(athleteId) {
+function getRunsForAthlete(athleteId) {
   return new Promise((resolve, reject) => {
     GetAthletesPage(athleteId).then(
       (html) => {
         try {
-          resolve(ParseResultsFromHtml(html, athleteId));
+          resolve(ParseRunsFromHtml(html, athleteId));
         } catch (error) {
           console.log(error);
-          reject(`Unable to get parse results for ${athleteId}`);
+          reject(`Unable to get parse runs for ${athleteId}`);
         }
       },
       (error) => {
         console.log(error);
-        reject(`Unable to get results for ${athleteId}`);
+        reject(`Unable to get runs for ${athleteId}`);
       }
     );
   });
-}
-
-function getLatestRunDate(allRuns) {
-  let results = allRuns.Results;
-  return results.reduce((a, b) => (a > b.RunDate ? a : b.RunDate), new Date(0));
 }

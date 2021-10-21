@@ -1,24 +1,24 @@
 const { GetAthleteIds } = require("./athletes");
 const bottleneck = require("bottleneck");
-const { GetResultsForAthlete } = require("./results");
+const { GetRunsForAthlete } = require("./results");
 const { Flatten } = require("../utils/flatten");
-const AllRuns = require("./models/all-runs");
+const Root = require("./models/root");
 
 module.exports = {
-  ScrapeResults: scrapeResults,
+  ScrapeRuns: scrapeRuns,
 };
 
-function scrapeResults() {
+function scrapeRuns() {
   return new Promise((resolve, reject) => {
     doWork()
       .then((data) => {
 
-        let allRuns = new AllRuns()
-        .WithResults(Flatten(data))
+        let root = new Root()
+        .WithRuns(Flatten(data))
 
-        allRuns.sort("RunDate");
-        
-        resolve(allRuns);
+        root.sort("RunDate");
+
+        resolve(root);
       })
       .catch((error) => {
         reject(error);
@@ -35,7 +35,7 @@ function doWork() {
   });
 
   return limiter.schedule(() => {
-    const allTasks = athleteIds.map((x) => GetResultsForAthlete(x));
+    const allTasks = athleteIds.map((x) => GetRunsForAthlete(x));
     // GOOD, we wait until all tasks are done.
     return Promise.all(allTasks);
   });
