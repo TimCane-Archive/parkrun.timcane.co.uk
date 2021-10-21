@@ -16,4 +16,13 @@ module.exports = class Runner extends Base {
       this.Name = val;
       return this;
     }
+
+    toJSON() {
+      let obj = super.toJSON();
+  
+      obj["id"] = this.Id;
+      obj["name"] = this.Name;
+  
+      return obj;
+    }
 }

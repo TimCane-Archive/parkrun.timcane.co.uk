@@ -1,13 +1,21 @@
-const Base = require("./base")
+const Base = require("./base");
 
 module.exports = class Course extends Base {
-    constructor() {
-      super()
-    }
+  constructor() {
+    super();
+  }
 
-    Name;
-    WithName(val){
-      this.Name = val;
-      return this;
-    }
-}
+  Name;
+  WithName(val) {
+    this.Name = val;
+    return this;
+  }
+
+  toJSON() {
+    let obj = super.toJSON();
+
+    obj["name"] = this.Name;
+
+    return obj;
+  }
+};

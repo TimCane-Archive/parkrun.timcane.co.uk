@@ -7,7 +7,15 @@ module.exports = class Year extends Base {
   
     Year;
     WithYear(val) {
-      this.Year = val;
+      this.Year = parseInt(val);
       return this;
+    }
+    
+    toJSON() {
+      let obj = super.toJSON();
+  
+      obj["year"] = this.Year;
+  
+      return obj;
     }
 }
