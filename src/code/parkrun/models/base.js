@@ -1,3 +1,5 @@
+const summary = require("../summary");
+
 module.exports = class Base {
   constructor() {}
 
@@ -11,10 +13,18 @@ module.exports = class Base {
     return this.Runs.length;
   }
 
+  get OverallSummary() {
+    return summary(this.Runs);
+  }
+
   toJSON() {
     return {
       runs: this.Runs,
-      total: this.Total,
+      stats: {
+        summary: {
+          overall: this.OverallSummary,
+        },
+      },
     };
   }
 };

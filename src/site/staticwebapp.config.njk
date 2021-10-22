@@ -6,7 +6,7 @@ layout: api
     "routes": [
         {
         "route": "/latest",
-        "redirect": "/dates/{{ parkrun.lastRun | date('yyyy') }}/{{ parkrun.lastRun | date('mm') }}/{{ parkrun.lastRun | date('dd') }}/"
+        "redirect": "/dates/{{ parkrun.root.LastRun | date('yyyy') }}/{{ parkrun.root.LastRun | date('mm') }}/{{ parkrun.root.LastRun | date('dd') }}/"
         }
     ],
     "responseOverrides": {

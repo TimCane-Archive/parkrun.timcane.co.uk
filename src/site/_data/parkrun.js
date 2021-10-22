@@ -5,15 +5,14 @@ module.exports = function () {
     ScrapeRuns()
       .then((root) => {
         resolve({
-          results: root,
+          root: root,
           courses: root.ByCourse(),
           runners: root.ByRunner(),
           dates: {
             year: root.ByYear(),
             month: root.ByMonth(),
             day: root.ByDay()
-          },
-          lastRun: root.LatestDate
+          }
         });
       })
       .catch((error) => {

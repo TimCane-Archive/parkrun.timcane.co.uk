@@ -6,13 +6,11 @@ const Year = require("./year");
 const Course = require("./course");
 const Runner = require("./runner");
 
-module.exports = class Root extends Base {
+const AnnualSummary = require("../mix-ins/annual-summary");
+const CourseSummary = require("../mix-ins/course-summary");
+const LastRun = require("../mix-ins/last-run");
 
-  get LatestDate(){
-    return this.Runs.reduce((a, b) => (a > b.RunDate ? a : b.RunDate), new Date(0));
-  }
-
-
+module.exports = class Root extends CourseSummary(AnnualSummary(LastRun(Base))) {
   sort(col) {
     this.Runs = this.Runs.sort((a, b) => {
       if (a[col] > b[col]) {

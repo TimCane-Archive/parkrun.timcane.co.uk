@@ -1,6 +1,7 @@
 const Base = require("./base")
+const CourseSummary = require("../mix-ins/course-summary")
 
-module.exports = class Year extends Base {
+module.exports = class Year extends CourseSummary(Base) {
     constructor() {
       super()
     }
