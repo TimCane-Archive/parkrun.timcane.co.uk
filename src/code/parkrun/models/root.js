@@ -1,16 +1,12 @@
-const Base = require("./base");
 const { GroupBy } = require("../../utils/group-by");
 const Day = require("./day");
 const Month = require("./month");
 const Year = require("./year");
 const Course = require("./course");
 const Runner = require("./runner");
+const { RootBase } = require("../mix-ins");
 
-const AnnualSummary = require("../mix-ins/annual-summary");
-const CourseSummary = require("../mix-ins/course-summary");
-const LastRun = require("../mix-ins/last-run");
-
-module.exports = class Root extends CourseSummary(AnnualSummary(LastRun(Base))) {
+module.exports = class Root extends RootBase {
   sort(col) {
     this.Runs = this.Runs.sort((a, b) => {
       if (a[col] > b[col]) {

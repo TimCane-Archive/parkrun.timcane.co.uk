@@ -1,9 +1,6 @@
-const Base = require("./base");
-const AnnualSummary = require("../mix-ins/annual-summary")
-const RunnerSummary = require("../mix-ins/runner-summary")
-const LastRun = require("../mix-ins/last-run");
+const { CourseBase } = require("../mix-ins");
 
-module.exports = class Course extends RunnerSummary(AnnualSummary(LastRun(Base))) {
+module.exports = class Course extends CourseBase {
   constructor() {
     super();
   }
