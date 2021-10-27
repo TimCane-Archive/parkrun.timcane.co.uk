@@ -21,6 +21,10 @@ module.exports = function (config) {
     config.addFilter("dateSlug", dateSlugFilter);
     config.addFilter("month", monthFilter);
 
+	config.setBrowserSyncConfig({
+		files: './dist/assets/css/*.css'
+	});
+
     if(process.env.ELEVENTY_ENV == "dev"){
         console.log("Running in DEV mode");
     } else if(process.env.ELEVENTY_ENV == "prod"){
