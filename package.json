@@ -6,12 +6,10 @@
   "scripts": {
     "serve:eleventy": "ELEVENTY_ENV=dev npx @11ty/eleventy --serve",
     "serve:sass": "npx sass src/site/_scss:dist/assets/css --watch",
-    "serve": "npm run serve:eleventy & npm run serve:sass",
-    
+    "serve": "npm run serve:eleventy && npm run serve:sass",
     "build:eleventy": "ELEVENTY_ENV=prod npx @11ty/eleventy",
     "build:sass": "npx sass src/site/_scss:dist/assets/css",
-    "build": "npm run build:eleventy & npm run build:sass"
-
+    "build": "npm run build:eleventy && npm run build:sass"
   },
   "repository": {
     "type": "git",
@@ -27,7 +25,8 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.12.1",
     "bottleneck": "^2.19.5",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "sass": "^1.43.4"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
