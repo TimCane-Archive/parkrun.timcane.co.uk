@@ -1,0 +1,98 @@
+---
+permalink: "dates/{{ year.year }}/index.html"
+layout: page
+
+pagination:
+    data: parkrun.dates.year
+    size: 1
+    alias: year
+
+eleventyComputed:
+    title: "{{ year.year }}"
+---
+
+<table class="sticky">
+    <thead>
+        <tr>
+            <th class="left">
+                {% if pagination.href.previous %}
+                    <a href="{{ pagination.href.previous }}">
+                    &larr;
+                    </a>
+                {% endif %}
+            </th>
+            <th colspan="6" class="center">
+                <h1>
+                    {{year.year}}
+                </h1>
+            </th>
+            <th class="right">
+                {% if pagination.href.next %}
+                    <a href="{{ pagination.href.next }}">
+                    &rarr;
+                    </a>
+                {% endif %}
+            </th>
+        </tr>
+        <tr>
+            <th class="left">
+                Run Date
+            </th>
+            <th class="left">
+                Athlete
+            </th>
+            <th class="left">
+               Course
+            </th>
+            <th class="center">
+                Run #
+            </th>
+            <th class="center">
+                Position
+            </th>
+            <th class="center">
+                Time
+            </th>
+            <th class="center">
+                Age Grade
+            </th>
+            <th class="center">
+                PB?
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    {% set cls = cycler("odd", "even") %}
+        {% for row in year.runs %}
+            <tr class="{{ cls.next() }}">
+                <td data-value="{{row.runDate.getTime()}}" data-label="Run Date" class="left">
+                    <a href="/dates/{{row.runDate | date('yyyy')}}/{{row.runDate | date('mm')}}/{{row.runDate | date('dd')}}">{{row.runDate | date("dS mmm")}}</a>
+                </td>
+                <td data-value="{{row.athleteName | lower}}"  data-label="Athlete" class="left">
+                    <a href="/runners/{{row.athleteName | slug }}">{{row.athleteName}}</a>
+                </td>
+                <td data-value="{{row.event | lower}}"  data-label="Course" class="left">
+                    <a href="/courses/{{row.event | slug }}">{{row.event}}</a>
+                </td>
+                <td data-value="{{row.runNumber}}" data-label="Run #" class="center">
+                    <a href="http://www.parkrun.org.uk/{{row.event | slug }}/results/weeklyresults?runSeqNumber={{row.runNumber}}">{{row.runNumber}}</a>
+                </td>
+                <td data-value="{{row.position}}" data-label="Position" class="center">{{row.position}}</td>
+                <td data-value="{{row.time}}" data-label="Time" class="center">{{row.time | time}}</td>
+                <td data-value="{{row.ageGrade}}" data-label="Age Grade" class="center">{{row.ageGrade}}%</td>
+                <td data-value="{{row.pB}}" data-label="PB?" class="center">
+                    {% if row.pb %}
+                        {% include "pb-medal.svg" %}
+                    {% else %}
+                    &nbsp;
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td class="center" colspan="8">Nothing to show</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include "pagination.njk" %}

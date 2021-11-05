@@ -16,7 +16,7 @@ function scrapeRuns() {
         let root = new Root()
         .WithRuns(Flatten(data))
 
-        root.sort("RunDate");
+        root.sort("runDate");
 
         resolve(root);
       })

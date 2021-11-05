@@ -1,9 +1,9 @@
 module.exports = (runs) => {
   return {
     total: runs.length,
-    time: stats(parseInt, runs, "Time"),
-    ageGrade: stats(parseFloat, runs, "AgeGrade"),
-    position: stats(parseInt, runs, "Position"),
+    time: stats(parseInt, runs, "time"),
+    ageGrade: stats(parseFloat, runs, "ageGrade"),
+    position: stats(parseInt, runs, "position"),
   };
 };
 

@@ -1,0 +1,98 @@
+
+table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    width: 100%;
+
+    &.sticky {
+        thead {
+            position: sticky;
+            top: 0;
+        }
+    }
+
+    tr {
+        th,
+        td {
+            padding: 12px 15px;
+            white-space: nowrap;
+            word-break: keep-all;
+        }
+    }
+
+    thead {
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        tr {
+            background-color: #009879;
+            color: #fff;
+            text-align: left;
+        }
+
+        th {
+            position: relative;
+            &:after {
+                position: absolute;
+                font-family: monospace;
+                top: 50%;
+                transform: translateY(-50%);
+                padding: 0 5px;
+            }
+            &[data-sort="asc"]:after {
+                content: "▲";
+            }
+
+            &[data-sort="desc"]:after {
+                content: "▼";
+            }
+        }
+    }
+    tbody {
+        tr {
+            border-bottom: 1px solid #ddd;
+
+            &:nth-of-type(even) {
+                background-color: #EDEDED;
+            }
+
+            &:last-of-type {
+                border-bottom: 2px solid #009879;
+            }
+
+            &.title {
+                border-bottom: 1px solid #009879;
+                color: #009879;
+                background-color: #E6E6E6;
+            }
+
+            td {
+                .pb-medal {
+                    fill: #009879;
+                }
+            }
+        }
+    }
+
+    .bottom {
+      font-size: 75%;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .left {
+        text-align: left;
+    }
+    .right {
+        text-align: right;
+    }
+
+    .is-pb{
+        color: #009879;
+        font-weight: bold;
+    }
+}

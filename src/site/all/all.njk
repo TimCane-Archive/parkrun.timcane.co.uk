@@ -1,0 +1,81 @@
+---
+layout: page
+---
+
+<table class="sticky">
+    <thead>
+        <tr>
+            <th colspan="7" class="center">
+                <h1>
+                    All Results
+                </h1>
+            </th>
+            <th class="center">
+                <div>Total Runs</div>
+                <div>{{parkrun.root.overallsummary.total | length}}</div>
+            </th>
+        </tr>
+        <tr>
+            <th class="left">
+                Athlete
+            </th>
+            <th class="left">
+                Course
+            </th>
+            <th class="left">
+                Run Date
+            </th>
+            <th class="center">
+                Run #
+            </th>
+            <th class="center">
+                Position
+            </th>
+            <th class="center">
+                Time
+            </th>
+            <th class="center">
+                Age Grade
+            </th>
+            <th class="center">
+                PB?
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set cls = cycler("odd", "even") %}
+        {% for row in parkrun.root.runs %}
+        <tr class="{{ cls.next() }}">
+            <td class="left">
+                <a href="/runners/{{row.athleteName | slug }}">{{row.athleteName}}</a>
+            </td>
+            <td class="left">
+                <a href="/courses/{{row.event | slug }}">{{row.event}}</a>
+            </td>
+            <td class="left">
+                <a
+                    href="/dates/{{row.runDate | date('yyyy')}}/{{row.runDate | date('mm')}}/{{row.runDate | date('dd')}}">{{row.runDate
+                    | date("dS mmm yyyy")}}</a>
+            </td>
+            <td class="center">
+                <a
+                    href="http://www.parkrun.org.uk/{{row.event | slug }}/results/weeklyresults?runSeqNumber={{row.runNumber}}">{{row.runNumber}}</a>
+            </td>
+            <td class="center">{{row.position}}</td>
+            <td class="center">{{row.time | time}}</td>
+            <td class="center">{{row.ageGrade}}%</td>
+            <td class="center">
+                {% if row.pb %}
+                {% include "pb-medal.svg" %}
+                {% else %}
+                &nbsp;
+                {% endif %}
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td class="center" colspan="7">Nothing to show</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

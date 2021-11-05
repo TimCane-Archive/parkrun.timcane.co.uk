@@ -8,7 +8,7 @@ const { RootBase } = require("../mix-ins");
 
 module.exports = class Root extends RootBase {
   sort(col) {
-    this.Runs = this.Runs.sort((a, b) => {
+    this.runs = this.runs.sort((a, b) => {
       if (a[col] > b[col]) {
         return -1;
       } else if (b[col] > a[col]) {
@@ -22,16 +22,16 @@ module.exports = class Root extends RootBase {
   ByDay() {
     let dates = [];
 
-    let groups = GroupBy(this.Runs, "RunDate");
+    let groups = GroupBy(this.runs, "runDate");
     for (const key in groups) {
       if (Object.hasOwnProperty.call(groups, key)) {
         const arr = groups[key];
 
         if (arr.length > 0) {
           let day = new Day()
-            .WithDay(arr[0].RunDate.getDate())
-            .WithMonth(arr[0].RunDate.getMonth() + 1)
-            .WithYear(arr[0].RunDate.getFullYear())
+            .WithDay(arr[0].runDate.getDate())
+            .WithMonth(arr[0].runDate.getMonth() + 1)
+            .WithYear(arr[0].runDate.getFullYear())
             .WithRuns(arr);
 
           dates.push(day);
@@ -45,9 +45,9 @@ module.exports = class Root extends RootBase {
   ByMonth() {
     let output = [];
 
-    var groups = this.Runs.reduce(function (rv, x) {
-      (rv[x.RunDate.getFullYear() + "-" + (x.RunDate.getMonth() + 1)] =
-        rv[x.RunDate.getFullYear() + "-" + (x.RunDate.getMonth() + 1)] ||
+    var groups = this.runs.reduce(function (rv, x) {
+      (rv[x.runDate.getFullYear() + "-" + (x.runDate.getMonth() + 1)] =
+        rv[x.runDate.getFullYear() + "-" + (x.runDate.getMonth() + 1)] ||
         []).push(x);
       return rv;
     }, {});
@@ -57,7 +57,7 @@ module.exports = class Root extends RootBase {
         let runs = groups[key];
 
         runs = runs.sort(function (a, b) {
-          return a.Time - b.Time;
+          return a.time - b.time;
         });
 
         let month = new Month()
@@ -75,8 +75,8 @@ module.exports = class Root extends RootBase {
   ByYear() {
     let output = [];
 
-    var groups = this.Runs.reduce(function (rv, x) {
-      (rv[x.RunDate.getFullYear()] = rv[x.RunDate.getFullYear()] || []).push(x);
+    var groups = this.runs.reduce(function (rv, x) {
+      (rv[x.runDate.getFullYear()] = rv[x.runDate.getFullYear()] || []).push(x);
       return rv;
     }, {});
 
@@ -85,7 +85,7 @@ module.exports = class Root extends RootBase {
         let runs = groups[key];
 
         runs = runs.sort(function (a, b) {
-          return a.Time - b.Time;
+          return a.time - b.time;
         });
 
         let year = new Year().WithYear(key).WithRuns(runs);
@@ -100,13 +100,13 @@ module.exports = class Root extends RootBase {
   ByCourse() {
     let courses = [];
 
-    let groups = GroupBy(this.Runs, "Event");
+    let groups = GroupBy(this.runs, "event");
     for (const key in groups) {
       if (Object.hasOwnProperty.call(groups, key)) {
         const arr = groups[key];
 
         if (arr.length > 0) {
-          let course = new Course().WithName(arr[0].Event).WithRuns(arr);
+          let course = new Course().WithName(arr[0].event).WithRuns(arr);
 
           courses.push(course);
         }
@@ -119,7 +119,7 @@ module.exports = class Root extends RootBase {
   ByRunner() {
     let runners = [];
 
-    let groups = GroupBy(this.Runs, "AthleteId");
+    let groups = GroupBy(this.runs, "athleteId");
     for (const key in groups) {
       if (Object.hasOwnProperty.call(groups, key)) {
         const arr = groups[key];
@@ -127,7 +127,7 @@ module.exports = class Root extends RootBase {
         if (arr.length > 0) {
           let runner = new Runner()
             .WithId(key)
-            .WithName(arr[0].AthleteName)
+            .WithName(arr[0].athleteName)
             .WithRuns(arr);
 
           runners.push(runner);

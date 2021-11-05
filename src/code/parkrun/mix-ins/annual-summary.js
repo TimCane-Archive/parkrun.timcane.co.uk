@@ -2,11 +2,11 @@ const summary = require("../summary");
 
 module.exports = (Base) =>
   class extends Base {
-    get AnnualSummary() {
+    get annualSummary() {
       let years = {};
 
-      var yearGroups = this.Runs.reduce(function (rv, x) {
-        (rv[x.RunDate.getFullYear()] = rv[x.RunDate.getFullYear()] || []).push(
+      var yearGroups = this.runs.reduce(function (rv, x) {
+        (rv[x.runDate.getFullYear()] = rv[x.runDate.getFullYear()] || []).push(
           x
         );
         return rv;
@@ -28,11 +28,7 @@ module.exports = (Base) =>
           obj.stats = {};
         }
   
-        if (!obj.stats.summary) {
-          obj.stats.summary = {};
-        }
-  
-        obj.stats.summary.annual = this.AnnualSummary;
+        obj.stats.annual = this.annualSummary;
   
         return obj;
       }

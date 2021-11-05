@@ -5,18 +5,23 @@ module.exports = class Day extends Month {
     super();
   }
 
-  Day;
+  day;
   WithDay(val) {
     if (val) {
-      this.Day = parseInt(("0" + val).slice(-2));
+      this.day = parseInt(("0" + val).slice(-2));
     }
     return this;
+  }
+
+  get date(){
+    return new Date(this.year, (this.month - 1), this.day);
   }
 
   toJSON() {
     let obj = super.toJSON();
 
-    obj["day"] = this.Day;
+    obj["day"] = this.day;
+    obj["date"] = this.date;
 
     return obj;
   }

@@ -5,23 +5,23 @@ module.exports = class Runner extends RunnerBase {
       super()
     }
 
-    Id;
+    id;
     WithId(val) {
-      this.Id = val;
+      this.id = val;
       return this;
     }
   
-    Name;
+    name;
     WithName(val) {
-      this.Name = val;
+      this.name = val;
       return this;
     }
 
     toJSON() {
       let obj = super.toJSON();
   
-      obj["id"] = this.Id;
-      obj["name"] = this.Name;
+      obj["id"] = this.id;
+      obj["name"] = this.name;
   
       return obj;
     }

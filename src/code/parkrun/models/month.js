@@ -5,10 +5,10 @@ module.exports = class Month extends Year {
     super();
   }
 
-  Month;
+  month;
   WithMonth(val) {
     if (val) {
-      this.Month = parseInt(("0" + val).slice(-2));
+      this.month = parseInt(("0" + val).slice(-2));
     }
     return this;
   }
@@ -16,7 +16,7 @@ module.exports = class Month extends Year {
   toJSON() {
     let obj = super.toJSON();
 
-    obj["month"] = this.Month;
+    obj["month"] = this.month;
 
     return obj;
   }

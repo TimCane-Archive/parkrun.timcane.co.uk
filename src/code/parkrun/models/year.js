@@ -5,16 +5,16 @@ module.exports = class Year extends DateBase {
       super()
     }
   
-    Year;
+    year;
     WithYear(val) {
-      this.Year = parseInt(val);
+      this.year = parseInt(val);
       return this;
     }
     
     toJSON() {
       let obj = super.toJSON();
   
-      obj["year"] = this.Year;
+      obj["year"] = this.year;
   
       return obj;
     }

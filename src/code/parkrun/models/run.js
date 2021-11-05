@@ -1,57 +1,57 @@
 module.exports = class Run {
   constructor() {}
 
-  AthleteId;
+  athleteId;
   WithAthleteId(val) {
-    this.AthleteId = val;
+    this.athleteId = val;
     return this;
   }
 
-  AthleteName;
+  athleteName;
   WithAthleteName(val) {
-    this.AthleteName = val;
+    this.athleteName = val;
     return this;
   }
 
-  Event;
+  event;
   WithEvent(val) {
-    this.Event = val;
+    this.event = val;
     return this;
   }
 
-  RunDate;
+  runDate;
   WithRunDate(val) {
-    this.RunDate = val;
+    this.runDate = val;
     return this;
   }
 
-  RunNumber;
+  runNumber;
   WithRunNumber(val) {
-    this.RunNumber = val;
+    this.runNumber = val;
     return this;
   }
 
-  Position;
+  position;
   WithPosition(val) {
-    this.Position = val;
+    this.position = val;
     return this;
   }
 
-  Time;
+  time;
   WithTime(val) {
-    this.Time = val;
+    this.time = val;
     return this;
   }
 
-  AgeGrade;
+  ageGrade;
   WithAgeGrade(val) {
-    this.AgeGrade = val;
+    this.ageGrade = val;
     return this;
   }
 
-  PB;
+  pb;
   WithPB(val) {
-    this.PB = val;
+    this.pb = val;
     return this;
   }
 };

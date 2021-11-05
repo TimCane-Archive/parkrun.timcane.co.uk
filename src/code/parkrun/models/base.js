@@ -3,27 +3,21 @@ const summary = require("../summary");
 module.exports = class Base {
   constructor() {}
 
-  Runs;
+  runs;
   WithRuns(val) {
-    this.Runs = val;
+    this.runs = val;
     return this;
   }
-
-  get Total() {
-    return this.Runs.length;
-  }
-
-  get OverallSummary() {
-    return summary(this.Runs);
+  
+  get overallSummary() {
+    return summary(this.runs);
   }
 
   toJSON() {
     return {
-      runs: this.Runs,
+      runs: this.runs,
       stats: {
-        summary: {
-          overall: this.OverallSummary,
-        },
+        overall: this.overallSummary,
       },
     };
   }

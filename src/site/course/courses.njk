@@ -1,0 +1,38 @@
+---
+permalink: "courses/index.html"
+layout: page
+title: Courses
+---
+
+<table class="sticky">
+    <thead>
+        <tr>
+            <th class="center" colspan="5">
+                <h1>Courses</h1>
+            </th>
+        </tr>
+        <tr>
+            <th class="left">Course</th>
+            <th class="left">Last Run</th>
+            <th class="center">Total Runs</th>
+            <th class="center">Best Time</th>
+            <th class="center">Average Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% set cls = cycler("odd", "even") %}
+        {% for course in parkrun.courses %}
+            <tr class="{{ cls.next() }}">
+                <td class="left">
+                    <a href="/courses/{{course.name | slug}}">{{course.name}}</a>
+                </td>
+                <td class="left">
+                    <a href="/dates/{{ course.lastRun | date('yyyy') }}/{{ course.lastRun | date('mm') }}/{{ course.lastRun | date('dd') }}/">{{course.lastRun | date("dS mmm yyyy")}}</a>
+                </td>
+                <td class="center">{{course.overallSummary.total}}</td>
+                <td class="center">{{course.overallSummary.time.fastest | time}}</td>
+                <td class="center">{{course.overallSummary.time.average | time}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

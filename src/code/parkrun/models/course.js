@@ -5,16 +5,16 @@ module.exports = class Course extends CourseBase {
     super();
   }
 
-  Name;
+  name;
   WithName(val) {
-    this.Name = val;
+    this.name = val;
     return this;
   }
 
   toJSON() {
     let obj = super.toJSON();
 
-    obj["name"] = this.Name;
+    obj["name"] = this.name;
 
     return obj;
   }

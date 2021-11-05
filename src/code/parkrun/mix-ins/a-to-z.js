@@ -1,9 +1,9 @@
 module.exports = (Base) =>
   class extends Base {
-    get AToZ() {
+    get aToZ() {
       const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-      let courses = [...new Set(this.Runs.map((r) => r.Event))].sort();
+      let courses = [...new Set(this.runs.map((r) => r.event))].sort();
 
       let letterGroups = courses.reduce(function (rv, x) {
         (rv[x[0]] = rv[x[0]] || []).push(x);
@@ -30,7 +30,7 @@ module.exports = (Base) =>
         obj.stats = {};
       }
 
-      obj.stats.atoz = this.AToZ;
+      obj.stats.atoz = this.aToZ;
 
       return obj;
     }

@@ -1,8 +1,8 @@
 module.exports = (Base) =>
   class extends Base {
-    get LastRun() {
-        return this.Runs.reduce(
-          (a, b) => (a > b.RunDate ? a : b.RunDate),
+    get lastRun() {
+        return this.runs.reduce(
+          (a, b) => (a > b.runDate ? a : b.runDate),
           new Date(0)
         );
       }
@@ -10,7 +10,7 @@ module.exports = (Base) =>
     toJSON() {
         let obj = super.toJSON();
   
-        obj.lastRun = this.LastRun;
+        obj.lastRun = this.lastRun;
   
         return obj;
       }

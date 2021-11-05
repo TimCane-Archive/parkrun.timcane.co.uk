@@ -2,11 +2,11 @@ const summary = require("../summary");
 
 module.exports = (Base) =>
   class extends Base {
-    get CourseSummary() {
+    get courseSummary() {
       let courses = {};
 
-      var courseGroups = this.Runs.reduce(function (rv, x) {
-        (rv[x.Event] = rv[x.Event] || []).push(x);
+      var courseGroups = this.runs.reduce(function (rv, x) {
+        (rv[x.event] = rv[x.event] || []).push(x);
         return rv;
       }, {});
 
@@ -26,11 +26,7 @@ module.exports = (Base) =>
         obj.stats = {};
       }
 
-      if (!obj.stats.summary) {
-        obj.stats.summary = {};
-      }
-
-      obj.stats.summary.course = this.CourseSummary;
+      obj.stats.course = this.courseSummary;
 
       return obj;
     }

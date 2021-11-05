@@ -2,11 +2,11 @@ const summary = require("../summary");
 
 module.exports = (Base) =>
   class extends Base {
-    get RunnerSummary() {
+    get runnerSummary() {
       let runners = {};
 
-      var runnerGroups = this.Runs.reduce(function (rv, x) {
-        (rv[x.AthleteName] = rv[x.AthleteName] || []).push(
+      var runnerGroups = this.runs.reduce(function (rv, x) {
+        (rv[x.athleteName] = rv[x.athleteName] || []).push(
           x
         );
         return rv;
@@ -27,12 +27,8 @@ module.exports = (Base) =>
         if (!obj.stats) {
           obj.stats = {};
         }
-  
-        if (!obj.stats.summary) {
-          obj.stats.summary = {};
-        }
-  
-        obj.stats.summary.runner = this.RunnerSummary;
+    
+        obj.stats.runner = this.runnerSummary;
   
         return obj;
       }
