@@ -6,7 +6,7 @@
   "scripts": {
     "serve:eleventy": "ELEVENTY_ENV=dev npx @11ty/eleventy --serve",
     "serve:sass": "npx sass src/site/_scss:dist/assets/css --watch",
-    "serve": "npm run serve:eleventy && npm run serve:sass",
+    "serve": "npm run serve:eleventy & npm run serve:sass",
     "build:eleventy": "ELEVENTY_ENV=prod npx @11ty/eleventy",
     "build:sass": "npx sass src/site/_scss:dist/assets/css",
     "build": "npm run build:eleventy && npm run build:sass"
